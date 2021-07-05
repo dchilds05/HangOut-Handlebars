@@ -3,12 +3,9 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 
-const saltRounds = 10;
-
 const User = require("../models/User.model");
 
 const loggedIn = require("../middleware/loggedIn");
-const notLoggedIn = require("../middleware/notLoggedIn");
 
 
 //LOGIN ROUTES

@@ -1,4 +1,5 @@
-require("dotenv/config");
+//require("dotenv/config");
+require('dotenv').config();
 
 require("./db");
 
@@ -7,12 +8,16 @@ const app = express();
 const hbs = require("hbs");
 require("./config")(app);
 
-
 const projectName = "hangout";
 const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowerCase();
 
 
 app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
+
+
+
+//API CONFIG HERE FOR NOW
+
 
 
 
@@ -26,7 +31,11 @@ app.use("/auth", authRoutes);
 const homeRoutes = require("./routes/home.routes");
 app.use("/home", homeRoutes);
 
+const searchRoutes = require("./routes/search.routes");
+app.use("/search", searchRoutes);
 
+const eventRoutes = require("./routes/event.routes");
+app.use("/event", eventRoutes);
 
 
 require("./error-handling")(app);
