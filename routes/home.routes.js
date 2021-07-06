@@ -8,7 +8,7 @@ const seedData = require("../seedData/events.json")
 
 router.get("/", notLoggedIn, (req, res) => {
   let example = seedData._embedded.events[0];
-  res.render("home" , {eventName: example});
+  res.render("home/home" , {eventName: example});
   });
 
 

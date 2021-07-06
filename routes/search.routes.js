@@ -2,13 +2,13 @@ const router = require("express").Router();
 
 const mongoose = require("mongoose");
 
+const axios = require('axios');
+
 const seeds = require("../seedData/events.json")
 
-//const User = require("../models/User.model");
 const Event = require("../models/Event.model");
 
 const convert = require("../helperFunctions/convertTmData");
-
 
 const notLoggedIn = require("../middleware/notLoggedIn");
 

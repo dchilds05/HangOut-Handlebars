@@ -1,6 +1,8 @@
 //require("dotenv/config");
 require('dotenv').config();
 
+const axios = require('axios');
+
 require("./db");
 
 const express = require("express");
@@ -16,8 +18,9 @@ app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
 
 
 
-//API CONFIG HERE FOR NOW
 
+
+//API CONFIG HERE FOR NOW
 
 
 
