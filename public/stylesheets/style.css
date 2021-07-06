@@ -49,7 +49,7 @@ nav {
   margin: 0;
 }
 
-#hiddenNav li {
+#hiddenNav li{
   list-style-type: none;
   height: 50px;
   width: 180px;
@@ -58,11 +58,11 @@ nav {
   align-items: center;
   justify-content: center;
   border: 1px solid grey;
+  color: white;
 }
 
-#hiddenNav li a {
+#hiddenNav a {
   text-decoration: none;
-  color: white;
 }
 
 #hiddenNav li:hover {

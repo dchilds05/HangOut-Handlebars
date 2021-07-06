@@ -11,6 +11,26 @@ router.get("/", notLoggedIn, (req, res) => {
   res.render("home/home" , {eventName: example});
   });
 
+router.get("/account", notLoggedIn, (req, res) => {
+  res.render("home/accountPage", req.session.user);
+  });
+
+router.get("/account/edit", notLoggedIn, (req, res) => {
+  res.render("home/editAccountDetails", req.session.user);
+  });
+
+router.get("/myEvents", notLoggedIn, (req, res) => {
+  res.render("home/myOwnEvents");
+  });
+
+router.get("/network", notLoggedIn, (req, res) => {
+  res.render("home/myNetwork");
+  });
+
+router.get("/upcomingEvents", notLoggedIn, (req, res) => {
+  res.render("home/myUpcomingEvents");
+  });
+
 
 
 module.exports = router;
