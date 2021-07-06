@@ -15,7 +15,7 @@ const notLoggedIn = require("../middleware/notLoggedIn");
 const findByValue = require("../helperFunctions/findByValue");
 
 
-const apiKey = process.env.APIKEY;
+const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
 
 
 //when search submitted
@@ -63,13 +63,11 @@ router.get("/", notLoggedIn, (req, res) => {
         }
         else {console.log("no results from API query")}
 
-        //Query our DB: 
-        //findByValue(keyword)
-
-        Event.find().then(results => console.log("Db results: ", results))
+        
     })
     .catch(err => console.log(err))
 
+    findByValue(keyword)
     
     //query our own DB now ( should be in the .then() from axios)
     //collectionName.find( { searchParametersGoHere } )
