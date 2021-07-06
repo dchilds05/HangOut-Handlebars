@@ -11,12 +11,27 @@
 
    <body>
       <nav>
-         <a href="/auth/logout">Log Out</a>
+         <img src="/images/hamburger.png" alt = "hamburger photo">
+         <div id="hiddenSideNav">
+            <ul>
+               <li><a href="">Home</a></li>
+               <li><a href="">Account</a></li>
+               <li><a href="">My Events</a></li>
+               <li><a href="">Network</a></li>
+               <li><a href="">Upcoming Events</a></li>
+               <li><a href="/auth/logout">Log Out</a></li>
+            </ul>
+         </div>
       </nav>
+      <div id = "bodyDiv">
 
       {{{body}}}
 
+      <a href="/auth/logout">Log Out</a>
+
       <script src="/js/script.js"></script>
+
+      </div>
    </body>
 
 </html>
