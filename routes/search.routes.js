@@ -22,25 +22,31 @@ const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
 let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/{resource}.json{?q*,apikey}`);
 
 
-
 //SEARCH API THEN DB THEN CONCAT RESULTS
 router.get("/", notLoggedIn, (req, res) => {
     let resultsArray = [];
 
     //get the search input:
     const keyword = req.query.keyword;
-    const city = req.query.city;
-    let date;
+    const citySearched = req.query.city;
+    let dateSearched;
+
+    let dateTwo = req.query.date;
 
     if (req.query.date) {date = req.query.date + "T" + req.query.time + ":00,*"}
-    else {date = ""}
+    else {dateSearched = ""}
 
 
     //QUERY THE API:
     //create the URI for the API:
     let searchUri = uriTemplate.expand({
         resource: "events",
-        q: {size: "100", keyword, city, localStartDateTime: date},
+        q: {
+            size: "100", 
+            keyword, 
+            city: citySearched,
+            localStartDateTime: dateSearched
+        },
         apikey: apiKey
       })
         
@@ -61,21 +67,28 @@ router.get("/", notLoggedIn, (req, res) => {
         }
 
     }).then(resultsFromApi => {
-        console.log(" >>>>>>>>> RESULTS API : ", resultsFromApi.length)
+        console.log(" >>>>>>>>> RESULTS API : ", resultsFromApi[0])
         //DB search
-        const searchString = keyword.split(" ").map(el=>`"${el}"`).join(" ");
+        const keywordString = keyword.split(" ").map(el=>`"${el}"`).join(" ");
 
-        Event.find({ $text: { $search: searchString } })
+        Event.find({ 
+            $and: [
+                {$text: { $search: keywordString }},
+                {"location.city": citySearched},
+                {"dateAndTime.date": dateTwo}
+            ]              
+        })
         .then(resultsFromDB => {
+            console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB)
             resultsArray = resultsFromApi.concat(resultsFromDB)
-            console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB.length)
+            console.log(" >>>>>>>>> RESULTS ALL : ", resultsArray.length)
         }).catch(err => console.log(err))
         
     })
     .catch(err => console.log(err))
 
 
-    res.render("search/searchResults" , resultsArray)
+    res.render("home/home")
 });
 
 

@@ -1,40 +1,41 @@
 <form action="/event/create" method="POST">
 
-   <label> Event name:
-      <input type="text" name="name">
-   </label>
+   <label>Event name: </label><br>
+      <input type="text" name="name" required> *
+   
 <br> <br>
-   <label> Type:
+   <label>Type: </label><br>
       <input type="text" name="type">
-   </label>
+   
 <br> <br>
-   <label> Tags:
-      <input type="text" name="tags">
-   </label>
+   <label>Tags: </label><br>
+      <input type="text" name="tags"><br>
+   
 <br> <br>
-   <br> <br>
-   <label >Venue: </label>
-      <input type="text" name="venueName">
+   <label>Venue: </label>
+      <input type="text" name="venueName"><br>
    <label>City: </label>
-      <input type="text" name="city">
+      <input type="text" name="city" required> *<br>
    <label>Country: </label>
-      <input type="text" name="country">
+      <input type="text" name="country"><br>
+
 <br> <br>
-<br> <br>
-    <label> Date:
-      <input type="text" name="date">
-    </label>
+    <label>Date and time: </label>
+      <input type="date" name="date" id="" required> *
+      <input type="time" name="" id="">
+
+    
 <br> <br>
     {{!-- to tickets platform or artist website? both? --}}
-    <label> External link:
+    <label> External link:</label><br>
       <input type="url" name="artistSiteUrl">
-    </label>
+    
 <br> <br>
-    <label> Image:
+    <label>Image: </label><br>
       <input type="img" name="img">
-    </label>
+    
 <br> <br>
-    <label> Description:</label><br>
+    <label>Description: </label><br>
       <textarea type="text" name="description"></textarea>
     
 <br> <br>
