@@ -21,6 +21,11 @@ const eventSchema = new Schema({
 	artistSiteUrl: String
 });
 
+eventSchema.index({
+	name: 1,
+	description: 1
+})
+
 const Event = model("Event", eventSchema);
 
 module.exports = Event;

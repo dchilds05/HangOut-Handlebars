@@ -60,23 +60,25 @@ router.get("/", notLoggedIn, (req, res) => {
             dataFromApi.forEach(event => {
                 resultsArray.push(convert(event));
             })
+            return resultsArray;
         }
         else {console.log("no results from API query")}
 
+    }).then(results2 => {
+        console.log(" >>>>>>>>> RESULTS TEST: ", results2.length)
+
+        //DB search
+        const searchString = keyword.split(" ").map(el=>`"${el}"`).join(" ");
+
+        Event.find({ $text: { $search: searchString } })
+        .then(results => {
+            resultsArray = results2.concat(results)
+            console.log(" >>>>>>>>> RESULTS API + DB : ", resultsArray.length)
+        })
         
     })
     .catch(err => console.log(err))
 
-    findByValue(keyword)
-    
-    //query our own DB now ( should be in the .then() from axios)
-    //collectionName.find( { searchParametersGoHere } )
-    /* Event.find({name: searchParam})
-    .then(results => {
-        allData = arrayOne.concat(results);
-    })
-    .catch(err => console.log("There is an error: ", err))
-     */
 
     res.render("home/home")
 });

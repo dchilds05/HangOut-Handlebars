@@ -6,7 +6,47 @@ const Event = require("../models/Event.model");
 
 
 
-function eventsFound(value) {
+
+function findByValue (value) {
+    console.log("Search is: ", value)
+
+    let keywordsArr = value.split(" ");
+    let results = [];
+
+
+    keywordsArr.forEach(keyword => {
+        Event.find()
+        .or([
+        { name: new RegExp(keyword, "i")}, 
+        { description: new RegExp(keyword, "i")}
+        ])
+        .then(events => {
+            results.push(...events)
+        })
+        .catch(err => console.log("error" , err))
+    })
+
+/*     if (keywordArr.length > 1 && object is there only once) {
+        remove that object from the array
+    } */
+    
+    //then take duplicates out
+    return new Set(results)
+
+
+} 
+
+
+
+
+
+
+
+
+
+/* 
+ 
+function findByValue (value) {
     console.log("Search is: ", value)
 
     let arr = value.split(" ");
@@ -14,39 +54,41 @@ function eventsFound(value) {
 
 
     arr.forEach(value => {
-    Event.find()
-    .or([
-    { name: new RegExp(value, "i")}, 
-    { description: new RegExp(value, "i")}
-    ])
-    .then(events => {
-    console.log("regexp result",events)
-    events.forEach(element => arrKey.push(element))
-    return arrKey;
+        Event.find()
+        .or([
+        { name: new RegExp(value, "i")}, 
+        { description: new RegExp(value, "i")}
+        ])
+        .then(events => {
+        console.log("regexp result",events)
+        events.forEach(element => arrKey.push(element))
+        console.log(arrKey);
+        })
+    
+        .catch(err => console.log("error" , err))
     })
+
+} 
+
+ */
+
+
+/*
+.then(arrkey => {
+    arrkey.filter((val,index,arr) => arr.findIndex(t => (t._id === val._id))===index)
+    console.log("filter result",arrkey)
+    return arrKey;
+})
+
     .then(arrkey => {
         arrkey.filter((val,index,arr) => arr.findIndex(t => (t._id === val._id))===index)
         console.log("filter result",arrkey)
         return arrKey;
     })
-    .catch(err => console.log("error" , err))
-    })
-
-}
 
 
- 
-function findByValue (val) {
-    let arr = val.split(" ")
-    
-    let result = eventsFound(val);
-    
-    console.log("hello", result)
-    
-} 
 
 
-/*
 
 function findByValue (val) {
     let arr = val.split(" ");
