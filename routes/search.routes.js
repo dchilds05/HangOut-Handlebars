@@ -56,25 +56,26 @@ router.get("/", notLoggedIn, (req, res) => {
     axios.get(searchUri)
     .then(results => {
         if (results.data._embedded && results.data._embedded.events) {
-            let dataFromApi = results.data._embedded.events;
-            dataFromApi.forEach(event => {
-                resultsArray.push(convert(event));
-            })
-            return resultsArray;
+            let events = results.data._embedded.events
+            let dataFromApi = events.map(convert)
+            return dataFromApi;
         }
-        else {console.log("no results from API query")}
+        else {
+            let emptyArr = [];
+            console.log("no results from API query")
+            return emptyArr
+        }
 
-    }).then(results2 => {
-        console.log(" >>>>>>>>> RESULTS TEST: ", results2.length)
-
+    }).then(resultsFromApi => {
+        console.log(" >>>>>>>>> RESULTS API : ", resultsFromApi)
         //DB search
         const searchString = keyword.split(" ").map(el=>`"${el}"`).join(" ");
 
         Event.find({ $text: { $search: searchString } })
-        .then(results => {
-            resultsArray = results2.concat(results)
-            console.log(" >>>>>>>>> RESULTS API + DB : ", resultsArray.length)
-        })
+        .then(resultsFromDB => {
+            resultsArray = resultsFromApi.concat(resultsFromDB)
+            console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB)
+        }).catch(err => console.log(err))
         
     })
     .catch(err => console.log(err))

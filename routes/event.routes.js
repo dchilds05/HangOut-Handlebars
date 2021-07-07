@@ -10,7 +10,7 @@ router.get("/create", (req, res) => {
 
 router.post("/create", (req, res) => {
 
-    const {name, type, tags, location, date, artistSiteUrl, img, description} = req.body
+    const {name, type, tags, date, artistSiteUrl, img, description} = req.body
 
     Event.create({name, type, tags, location, date, artistSiteUrl, img, description})
     .then(event => {
