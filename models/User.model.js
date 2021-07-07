@@ -7,6 +7,14 @@ const userSchema = new Schema({
     // unique: true -> Ideally, should be unique, but its up to you
   },
   password: String,
+  email: String,
+  city: String,
+  age: Number,
+  imageUrl: {
+		type: String,
+		default:
+			'/images/noPhoto.png'
+	}
 });
 
 const User = model("User", userSchema);
