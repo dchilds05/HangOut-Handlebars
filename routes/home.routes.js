@@ -12,8 +12,7 @@ const imageUploader = require('./../config/cloudinary')
 
 
 router.get("/", notLoggedIn, (req, res) => {
-  let example = seedData._embedded.events[0];
-  res.render("home/home" , {eventName: example});
+  res.render("home/home" , req.session.user);
   });
 
 router.get("/account", notLoggedIn, (req, res) => {
@@ -47,7 +46,7 @@ router.post('/account/edit', imageUploader.single('imageUrl'), (req, res) => {
       User.findByIdAndUpdate(userId, req.body)
         .then((updatedUser) => {
           console.log("Updated user: " + updatedUser);
-          res.redirect('/home/account');
+          res.redirect('/auth/logout');
         })
         .catch((error) => {
           console.log(error);
@@ -58,7 +57,7 @@ router.post('/account/edit', imageUploader.single('imageUrl'), (req, res) => {
     User.findByIdAndUpdate(userId, req.body)
       .then((updatedUser) => {
         console.log("Updated user: " + updatedUser);
-        res.redirect('/home/account');
+        res.redirect('/auth/logout');
       })
       .catch((error) => {
         console.log(error);
@@ -68,15 +67,15 @@ router.post('/account/edit', imageUploader.single('imageUrl'), (req, res) => {
 
 
 router.get("/myEvents", notLoggedIn, (req, res) => {
-  res.render("home/myOwnEvents");
+  res.render("home/myOwnEvents", req.session.user);
   });
 
 router.get("/network", notLoggedIn, (req, res) => {
-  res.render("home/myNetwork");
+  res.render("home/myNetwork", req.session.user);
   });
 
 router.get("/upcomingEvents", notLoggedIn, (req, res) => {
-  res.render("home/myUpcomingEvents");
+  res.render("home/myUpcomingEvents", req.session.user);
   });
 
 

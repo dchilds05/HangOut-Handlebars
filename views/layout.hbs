@@ -13,7 +13,11 @@
       <nav>
          <a href="javascript:void(0);"  id = "clickBurger"><img src="/images/hamburger.png" id = "navImg1" alt = "hamburger photo"></a>
          <img id = "navImg2" src="/images/logoRectangleClose.png" alt = "logo">
-         <img id = "navImg3" src="/images/noPhoto.png" alt = "logo">
+         <div class = "layoutImageCropper">
+            {{#if imageUrl}}
+            <img id = "navImg3" src={{imageUrl}} alt = "User Image">
+            {{/if}}
+         </div>
       </nav>
 
       <ul id = "hiddenNav">
