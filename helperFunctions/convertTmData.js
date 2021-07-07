@@ -22,13 +22,14 @@ function convertTmData (TmObject) {
     newObject.img = TmObject.images[0].url;
     newObject.owner = "Ticketmaster";
     
+    
     if(TmObject._embedded.attractions && TmObject._embedded.attractions[0].externalLinks && TmObject._embedded.attractions[0].externalLinks.homepage){
         newObject.artistSiteUrl = TmObject._embedded.attractions[0].externalLinks.homepage[0].url
-     } else if (TmObject._embedded.attractions) {
+    } else if (TmObject._embedded.attractions) {
         newObject.artistSiteUrl = TmObject._embedded.attractions[0].url;
-     } else {
+    } else {
         newObject.artistSiteUrl = " ";
-     }
+    }
 
     return newObject;
 }

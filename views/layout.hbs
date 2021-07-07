@@ -11,27 +11,25 @@
 
    <body>
       <nav>
-         <img src="/images/hamburger.png" alt = "hamburger photo">
-         <div id="hiddenSideNav">
-            <ul>
-               <li><a href="">Home</a></li>
-               <li><a href="">Account</a></li>
-               <li><a href="">My Events</a></li>
-               <li><a href="">Network</a></li>
-               <li><a href="">Upcoming Events</a></li>
-               <li><a href="/auth/logout">Log Out</a></li>
-            </ul>
-         </div>
+         <a href="javascript:void(0);"  id = "clickBurger"><img src="/images/hamburger.png" id = "navImg1" alt = "hamburger photo"></a>
+         <img id = "navImg2" src="/images/logoRectangleClose.png" alt = "logo">
+         <img id = "navImg3" src="/images/noPhoto.png" alt = "logo">
       </nav>
-      <div id = "bodyDiv">
+
+      <ul id = "hiddenNav">
+         <a href="/home"><li>Home</li></a>
+         <a href="/home/account"><li>Account</li></a>
+         <a href="/home/myEvents"><li>My Events</li></a>
+         <a href="/home/network"><li>Network</li></a>
+         <a href="/home/upcomingEvents"><li>Upcoming Events</li></a>
+         <a href="/auth/logout"><li>Log Out</li></a>
+      </ul>
 
       {{{body}}}
 
-      <a href="/auth/logout">Log Out</a>
-
+   
       <script src="/js/script.js"></script>
 
-      </div>
    </body>
 
 </html>

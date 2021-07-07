@@ -16,8 +16,6 @@ const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowe
 
 app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
 
-const hamburger = require("./helperFunctions/hamburgerFunction");
-
 
 
 
@@ -46,3 +44,4 @@ app.use("/event", eventRoutes);
 require("./error-handling")(app);
 
 module.exports = app;
+  

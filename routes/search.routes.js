@@ -18,18 +18,12 @@ const findByValue = require("../helperFunctions/findByValue");
 const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
 
 
-//when search submitted
-// query API -> forEach apply convert
-// query DB 
-// concat both results and render using combined data
-
-
 //CREATE URI
 let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/{resource}.json{?q*,apikey}`);
 
 
 
-
+//SEARCH API THEN DB THEN CONCAT RESULTS
 router.get("/", notLoggedIn, (req, res) => {
     let resultsArray = [];
 
@@ -67,22 +61,30 @@ router.get("/", notLoggedIn, (req, res) => {
         }
 
     }).then(resultsFromApi => {
-        console.log(" >>>>>>>>> RESULTS API : ", resultsFromApi)
+        console.log(" >>>>>>>>> RESULTS API : ", resultsFromApi.length)
         //DB search
         const searchString = keyword.split(" ").map(el=>`"${el}"`).join(" ");
 
         Event.find({ $text: { $search: searchString } })
         .then(resultsFromDB => {
             resultsArray = resultsFromApi.concat(resultsFromDB)
-            console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB)
+            console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB.length)
         }).catch(err => console.log(err))
         
     })
     .catch(err => console.log(err))
 
 
-    res.render("home/home")
+    res.render("search/searchResults" , resultsArray)
 });
+
+
+//LEFT TO DO : 
+//-SORT RESULTS (BY DATE?)
+//array.sort(el, el2 => el.date .localcompare el2.date)
+//-CHANGE THE EVENT MODEL (OBJECTS/ARRAYS, HOW TO CREATE DOC WITH IT? AND INDEX?)
+//DISPLAY RESULTS
+
 
 module.exports = router;
 

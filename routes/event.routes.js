@@ -10,9 +10,12 @@ router.get("/create", (req, res) => {
 
 router.post("/create", (req, res) => {
 
-    const {name, type, tags, date, location, artistSiteUrl, img, description} = req.body
+    const {name, type, tags, artistSiteUrl, img, description, venueName, city, country, date, time} = req.body;
 
-    Event.create({name, type, tags, location, date, artistSiteUrl, img, description})
+    let location = {venueName, city, country}
+    let dateAndTime= {date, time}
+
+    Event.create({name, type, tags, location, dateAndTime, artistSiteUrl, img, description})
     .then(event => {
         console.log(event)
         res.render("eventPages/event")

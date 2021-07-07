@@ -1,6 +1,7 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0px;
+  margin: 0px;
 }
 
 a {
@@ -12,35 +13,69 @@ h1 {
 }
 
 nav {
-  padding: 0px;
+  background-color: #3AC28A;
+  position: relative;
+  top: 0;
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#navImg1 {
+  padding: 9px 7px 7px 15px;
+  height: 25px;
+}
+
+#navImg2 {
+  padding: 7px;
+  height: 35px;
+}
+
+#navImg3 {
+  padding: 7px 15px 7px 7px;
+  height: 35px;
+}
+
+#hiddenNav {
+  display: none;
   background-color: rgb(204, 200, 200);
   position: absolute;
-  top: 0;
-  height: 40px;
-  width: 100%;
-}
-
-#hiddenSideNav {
-  display: none;
-}
-
-nav a {
-  color: white;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  display: block;
-}
-
-nav img {
-  position: absolute;
-  height: 40px;
+  top: 60px;
   left: 0;
-  top: 0;
+  padding: 0;
+  margin: 0;
 }
 
-nav a:hover {
+#hiddenNav li{
+  list-style-type: none;
+  height: 50px;
+  width: 180px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid grey;
+  color: white;
+}
+
+#hiddenNav a {
+  text-decoration: none;
+}
+
+#hiddenNav li:hover {
   background-color: #ddd;
   color: black;
 }
 
+#hiddenNav li a:hover {
+  color: black;
+}
+
+#accountPagePhoto {
+  width: 200px;
+  display: block;
+  border-radius: 50%;  
+}

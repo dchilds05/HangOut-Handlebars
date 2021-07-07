@@ -11,7 +11,7 @@ const eventSchema = new Schema({
         city: String,
         country: String
     },
-	date: {
+	dateAndTime: {
         date: String,
         time: String
     },
