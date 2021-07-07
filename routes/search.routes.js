@@ -18,18 +18,12 @@ const findByValue = require("../helperFunctions/findByValue");
 const apiKey = process.env.APIKEY;
 
 
-//when search submitted
-// query API -> forEach apply convert
-// query DB 
-// concat both results and render using combined data
-
-
 //CREATE URI
 let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/{resource}.json{?q*,apikey}`);
 
 
 
-
+//SEARCH API THEN DB THEN CONCAT RESULTS
 router.get("/", notLoggedIn, (req, res) => {
     let resultsArray = [];
 
@@ -56,32 +50,41 @@ router.get("/", notLoggedIn, (req, res) => {
     axios.get(searchUri)
     .then(results => {
         if (results.data._embedded && results.data._embedded.events) {
-            let dataFromApi = results.data._embedded.events;
-            dataFromApi.forEach(event => {
-                resultsArray.push(convert(event));
-            })
+            let events = results.data._embedded.events
+            let dataFromApi = events.map(convert)
+            return dataFromApi;
         }
-        else {console.log("no results from API query")}
+        else {
+            let emptyArr = [];
+            console.log("no results from API query")
+            return emptyArr
+        }
 
-        //Query our DB: 
-        //findByValue(keyword)
+    }).then(resultsFromApi => {
+        console.log(" >>>>>>>>> RESULTS API : ", resultsFromApi.length)
+        //DB search
+        const searchString = keyword.split(" ").map(el=>`"${el}"`).join(" ");
 
-        Event.find().then(results => console.log("Db results: ", results))
+        Event.find({ $text: { $search: searchString } })
+        .then(resultsFromDB => {
+            resultsArray = resultsFromApi.concat(resultsFromDB)
+            console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB.length)
+        }).catch(err => console.log(err))
+        
     })
     .catch(err => console.log(err))
 
-    
-    //query our own DB now ( should be in the .then() from axios)
-    //collectionName.find( { searchParametersGoHere } )
-    /* Event.find({name: searchParam})
-    .then(results => {
-        allData = arrayOne.concat(results);
-    })
-    .catch(err => console.log("There is an error: ", err))
-     */
 
-    res.render("home/home")
+    res.render("search/searchResults" , resultsArray)
 });
+
+
+//LEFT TO DO : 
+//-SORT RESULTS (BY DATE?)
+//array.sort(el, el2 => el.date .localcompare el2.date)
+//-CHANGE THE EVENT MODEL (OBJECTS/ARRAYS, HOW TO CREATE DOC WITH IT? AND INDEX?)
+//DISPLAY RESULTS
+
 
 module.exports = router;
 

@@ -12,8 +12,7 @@ const userSchema = new Schema({
   age: Number,
   imageUrl: {
 		type: String,
-		default:
-			'/images/noPhoto.png'
+		default: '/images/noPhoto.png'
 	}
 });
 

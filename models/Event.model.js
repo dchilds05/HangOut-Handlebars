@@ -11,7 +11,7 @@ const eventSchema = new Schema({
         city: String,
         country: String
     },
-	date: {
+	dateAndTime: {
         date: String,
         time: String
     },
@@ -20,6 +20,18 @@ const eventSchema = new Schema({
 	owner: String,
 	artistSiteUrl: String
 });
+
+
+eventSchema.index({
+	"name": 1,
+	"description": 1,
+	"type": 1,
+	"tags": 1,
+	"location.venueName": 1,
+	"location.city": 1,
+	"location.country": 1
+})
+
 
 const Event = model("Event", eventSchema);
 

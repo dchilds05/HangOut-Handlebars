@@ -30,6 +30,8 @@ router.post('/account/edit', imageUploader.single('imageUrl'), (req, res) => {
 
   Object.keys(req.body) // This method returns an array of the object keys
   .forEach(key => (!req.body[key] && req.body[key] !== undefined) && delete req.body[key]);
+
+  req.body.imageUrl = req.file.path;
   
   if(req.body.password) {
     if (req.body.password.length < 8) {

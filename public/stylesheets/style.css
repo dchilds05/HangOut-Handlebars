@@ -74,3 +74,8 @@ nav {
   color: black;
 }
 
+#accountPagePhoto {
+  width: 200px;
+  display: block;
+  border-radius: 50%;  
+}
