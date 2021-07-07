@@ -12,9 +12,9 @@ function convertTmData (TmObject) {
 
     newObject.description = TmObject.description ? TmObject.description : "";
 
-    newObject.date = {
+    newObject.dateAndTime = {
         date: TmObject.dates.start.localDate ? TmObject.dates.start.localDate : "",
-        time: TmObject.dates.start.localTime ? TmObject.dates.start.localTime : "" 
+        time: TmObject.dates.start.localTime ? TmObject.dates.start.localTime.slice(0, 5) : "" 
     }
 
 
@@ -26,7 +26,6 @@ function convertTmData (TmObject) {
             TmObject.classifications[0].subGenre.name
         ];
     } else {
-        console.log("issue with ID: ", TmObject.id)
         newObject.tags = "";
     }
 
@@ -59,7 +58,6 @@ function convertTmData (TmObject) {
         } 
         else {
             newObject.artistSiteUrl = "";
-            console.log("issue with ID: ", TmObject.id)
         }
 
     }

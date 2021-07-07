@@ -29,12 +29,9 @@ router.get("/", notLoggedIn, (req, res) => {
     //get the search input:
     const keyword = req.query.keyword;
     const citySearched = req.query.city;
-    let dateSearched;
+    const date = req.query.date;
 
-    let dateTwo = req.query.date;
-
-    if (req.query.date) {date = req.query.date + "T" + req.query.time + ":00,*"}
-    else {dateSearched = ""}
+    let dateApi = date + "T00:00:00,*"
 
 
     //QUERY THE API:
@@ -42,10 +39,10 @@ router.get("/", notLoggedIn, (req, res) => {
     let searchUri = uriTemplate.expand({
         resource: "events",
         q: {
-            size: "100", 
+            size: "50", 
             keyword, 
             city: citySearched,
-            localStartDateTime: dateSearched
+            localStartDateTime: dateApi
         },
         apikey: apiKey
       })
@@ -75,20 +72,28 @@ router.get("/", notLoggedIn, (req, res) => {
             $and: [
                 {$text: { $search: keywordString }},
                 {"location.city": citySearched},
-                {"dateAndTime.date": dateTwo}
+                {"dateAndTime.date": { $gte: new Date(date) }}
             ]              
         })
         .then(resultsFromDB => {
             console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB)
             resultsArray = resultsFromApi.concat(resultsFromDB)
-            console.log(" >>>>>>>>> RESULTS ALL : ", resultsArray.length)
+            console.log(" >>>>>>>>> RESULTS ALL : ", resultsArray[0])
+
+            if(resultsArray || resultsArray.length > 1) {
+                resultsArray.sort((a, b) => {return new Date(a.dateAndTime.date) - new Date(b.dateAndTime.date)})
+            }
+
+
+            if(!resultsArray || resultsArray.length === 0){res.render("search/noSearchResults")}
+            else {res.render("search/searchResults" , {results: resultsArray})}
+
         }).catch(err => console.log(err))
         
+        console.log("test session : " , req.session.user)
     })
     .catch(err => console.log(err))
 
-
-    res.render("home/home")
 });
 
 

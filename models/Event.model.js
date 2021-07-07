@@ -12,13 +12,15 @@ const eventSchema = new Schema({
         country: String
     },
 	dateAndTime: {
-        date: String,
+        date: Date,
         time: String
     },
 	urlForTickets: String,
 	img: String,
 	owner: String,
-	artistSiteUrl: String
+	artistSiteUrl: String,
+	owner: { type: Schema.Types.ObjectId, ref: "User" },
+	followers: [{ type: Schema.Types.ObjectId, ref: "User" }]
 });
 
 eventSchema.index({
