@@ -28,11 +28,35 @@ router.post("/create", (req, res) => {
 })
 
 router.post("/:id/fav", (req, res) => {
-    const userId = req.session.user._id
+    
     const eventId = req.params.id
-    User.findByIdAndUpdate(userId, {
-        $addToSet: {favEvents: eventId}
+    const userId = req.session.user._id
+
+    console.log("user: ", userId, "event: ", eventId)
+
+    Event.findById(eventId)
+    .then(eventFound => {
+        let newEvent = {
+            source: "Hangout",
+            id: eventFound._id
+        }
+        User.findByIdAndUpdate(userId, {
+            $push: {favEvents: newEvent}
+        }).then(user => console.log("user was updated"))
+        console.log("this event is ours")
     })
+    .catch(eventNotFound => {
+        let newEvent = {
+            source: "TicketMaster",
+            id: eventId
+        }
+        User.findByIdAndUpdate(userId, {
+            $push: {favEvents: newEvent}
+        }).then(user => console.log("user was updated"))
+        console.log("this event: ", newEvent, " is not ours")
+    })
+
+
 })
 
 router.get("/", (req, res) => {

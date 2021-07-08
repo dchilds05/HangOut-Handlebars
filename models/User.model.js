@@ -16,12 +16,10 @@ const userSchema = new Schema({
 	},
   createdEvents: [{ type: Schema.Types.ObjectId, ref: "Event" }],
 	favEvents: [
-    [{ type: Schema.Types.ObjectId, ref: "Event" }], 
-    [{ 
-      name: String,
-      apiId: String,
-      date: String
-    }] 
+    { 
+      source: String,
+      id: String,
+    }
   ]
 });
 

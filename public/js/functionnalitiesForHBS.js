@@ -6,12 +6,7 @@ return function(event){
 }
 }
 
-
-function tryingSomething(eventId) {
-    console.log("save2 button clicked!!")
-    console.log("returns: " , eventId)
-}
-    // Your code here.
+ // Your code here.
     //If you don't want the link to actually 
     // redirect the browser to another page,
     // "google.com" in our example here, then
