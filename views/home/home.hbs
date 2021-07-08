@@ -1,25 +1,32 @@
-<h1>Welcome home!</h1>
-
-
 {{!-- <p>Example of event: {{eventName}} </p> --}}
+<div id = "homeMamaDiv">
+    <section id = "homeSection1">
+        <form action="/search" method="GET">
+            <input type="text" name="keyword" placeholder="KEYWORDS(s)*" required>
+            <input type="text" name="city" placeholder="CITY*" required>
+            <input type="date" name="date*" required>
+            <button type="submit">SEARCH</button>
+        </form>
+    </section>
 
-<a href="/event/create"><button>Create an Event</button></a>
+    <section id = "homeSection2">
 
-<br>
-<br>
+        <div id = "homeSection2Div1">
+            Section 2 Div 1
+        </div>
 
-<h2>Search form:</h2>
+        <div id = "homeSection2Div2">
+            Section 2 Div 2
+        </div>
 
-<form action="/search" method="GET">
-    <input type="text" name="keyword" placeholder="keyword(s)" required>*<br>
-    <input type="text" name="city" placeholder="city" required>*<br>
-    <input type="date" name="date" required>*<br>
-    <br>
+    </section>
 
-    <br>
-	<button type="submit">SEARCH</button>
-</form>
+    <section id = "homeSection3">
+        Section 3
+    </section>
+
+</div>
 
 
-<h2>{{done}}</h2>
+
 

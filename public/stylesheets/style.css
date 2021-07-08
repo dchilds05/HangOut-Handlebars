@@ -30,12 +30,12 @@ nav {
 
 #navImg1 {
   padding: 9px 7px 7px 15px;
-  height: 25px;
+  height: 35px;
 }
 
 #navImg2 {
   padding: 7px;
-  height: 35px;
+  height: 45px;
 }
 
 .layoutImageCropper {
@@ -212,18 +212,12 @@ nav {
 
 /*  ACCOUNT PAGE  */
 
-#accountPageMamaDiv {
-  border: 1px solid red;
-}
-
 #accountPageSection1 {
-  border: 1px solid blue;
   display: flex;
   justify-content: space-evenly;
 }
 
 #accountSection1Div1 {
-  border: 1px solid orange;
   width: 50%;
 }
 
@@ -247,7 +241,6 @@ nav {
 }
 
 #accountSection1Div2 {
-  border: 1px solid orange;
   width: 50%;
   display:flex;
   flex-direction: column;
@@ -262,16 +255,89 @@ nav {
 }
 
 #accountPageSection1 {
-  border: 1px solid blue;
 }
 
 #accountSection2Div1, #accountSection2Div2{
-  border: 1px solid orange;
   margin-top: 50px;
   height: 300px;
   font-size: 25px;
   font-weight: 600;
   text-decoration: underline;
+}
+
+#accountCreatedEvents {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.createdEventsIndividualSection {
+  display: inline-block;
+  width: 350px;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.createdEventsIndividualSection:hover {
+  background-color: #777;
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.eachImage {
+  height: 200px;
+}
+
+.lastDiv {
+  color: black;
+} 
+
+.dateTime {
+  font-size: 15px;
+  margin-top: 15px;
+  white-space: normal;
+}
+
+
+
+/* HOME PAGE  */
+
+#homeMamaDiv {
+ border: 1px solid red;
+ display: flex;
+ flex-direction: column;
+}
+
+#homeSection1 {
+  border: 1px solid blue;
+}
+
+#homeSection1 form {
+
+}
+
+#homeSection2 {
+  border: 1px solid blue;
+  display: flex;
+ flex-direction: row;
+}
+
+#homeSection2 {
+  border: 1px solid blue;
+}
+
+#homeSection2Div1 {
+  border: 1px solid green;
+  width: 50%;
+}
+
+#homeSection2Div2 {
+  border: 1px solid green;
+  width: 50%;
 }
 
 
