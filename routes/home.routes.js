@@ -16,8 +16,12 @@ router.get("/", notLoggedIn, (req, res) => {
   });
 
 router.get("/account", notLoggedIn, (req, res) => {
-  res.render("home/accountPage", req.session.user);
-  });
+  User.findById(req.session.user._id)
+  .populate("createdEvents")
+  .then((user) => {
+    res.render("home/accountPage", user);
+  })
+});
 
 router.get("/account/edit", notLoggedIn, (req, res) => {
   res.render("home/editAccountDetails", req.session.user);
