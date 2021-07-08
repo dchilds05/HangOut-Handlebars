@@ -3,10 +3,34 @@
 <br>
 <br>
 
-{{#each event}}
 
-<h3>Event name: {{event.name}}</h3>
-<br>
-<br>
+{{#each results}}
 
-{{/event}}
+<div class="column is-4">
+<div class="card medium">
+    <header class="card-header">
+        <p class="card-header-title">
+          {{this.name}}
+        </p>
+    </header>
+    <div class="card-image">
+        <figure class="image">
+          <img src={{this.img}} alt="Placeholder image">
+        </figure>
+    </div>
+    <div class="card-content">
+        <div class="content">
+
+            <h5 class="title"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
+
+        </div>
+    </div>
+    <footer class="card-footer">
+        <a href="#" class="card-footer-item">Save</a>
+        <a href="#" class="card-footer-item">Edit</a>
+        <a href="#" class="card-footer-item">Delete</a>
+    </footer>
+</div>
+</div>
+
+{{/each}}

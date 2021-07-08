@@ -1,47 +1,138 @@
+
+
 <form action="/event/create" method="POST">
 
-   <label> Event name:
-      <input type="text" name="name">
-   </label>
+   <label>Event name: </label><br>
+      <input type="text" name="name" required> *
+   
 <br> <br>
-   <label> Type:
+   <label>Type: </label><br>
       <input type="text" name="type">
-   </label>
+   
 <br> <br>
-   <label> Tags:
-      <input type="text" name="tags">
-   </label>
+   <label>Tags: </label><br>
+      <input type="text" name="tags"><br>
+   
 <br> <br>
-   <br> <br>
-   <label >Venue: </label>
-      <input type="text" name="venueName">
+   <label>Venue: </label>
+      <input type="text" name="venueName"><br>
    <label>City: </label>
-      <input type="text" name="city">
+      <input type="text" name="city" required> *<br>
    <label>Country: </label>
-      <input type="text" name="country">
+      <input type="text" name="country"><br>
+
 <br> <br>
-<br> <br>
-    <label> Date:
-      <input type="text" name="date">
-    </label>
+    <label>Date and time: </label>
+      <input type="date" name="date" id="" required> *
+      <input type="time" name="" id="">
+
+    
 <br> <br>
     {{!-- to tickets platform or artist website? both? --}}
-    <label> External link:
+    <label> External link:</label><br>
       <input type="url" name="artistSiteUrl">
-    </label>
+    
 <br> <br>
-    <label> Image:
+    <label>Image: </label><br>
       <input type="img" name="img">
-    </label>
+    
 <br> <br>
-    <label> Description:
-      <input type="text" name="description">
-    </label>
+    <label>Description: </label><br>
+      <textarea type="text" name="description"></textarea>
+    
 <br> <br>
    <button type="submit">Submit</button>
 </form>
 
 
+
+
+
+
+
+
+<form class="box" action="/event/create" method="POST">
+   <div class="field">
+      <label class="label">* Event name:</label>
+      <div class="control">
+         <input name="name" class="input" type="text" placeholder="e.g. DJ and Tapas in Barcelona!" required>
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">* City:</label>
+      <div class="control">
+         <input name="city" class="input" type="text" placeholder="e.g. Barcelona" required>
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">* Date:</label>
+      <div class="control">
+         <input name="date" class="input" type="date" required>
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">Time:</label>
+      <div class="control">
+         <input name="time" class="input" type="time">
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">Image:</label>
+      <div class="control">
+         <input type="file" class="input" name="img"/>
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">Type of event:</label>
+      <div class="control">
+         <input name="type" class="input" type="text" placeholder="e.g. concert">
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">Description:</label>
+      <div class="control">
+         <textarea name="type" class="textarea" type="text" placeholder="e.g. concert"></textarea>
+      </div>
+   </div>
+   
+
+
+   <div class="field">
+      <label class="label">Tags:</label>
+      <div class="control">
+         <input name="tags" class="input" type="text" placeholder="e.g. music dj rooftop">
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">Venue:</label>
+      <div class="control">
+         <input name="venueName" class="input" type="text" placeholder="e.g. Palau San Jordi">
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">Country:</label>
+      <div class="control">
+         <input name="country" class="input" type="text" placeholder="e.g. Spain">
+      </div>
+   </div>
+
+   <div class="field">
+      <label class="label">External link:</label>
+      <div class="control">
+         <input name="artistSiteUrl" class="input" type="url" placeholder="e.g. artist's Spotify page">
+      </div>
+   </div>
+
+  <button class="button is-primary" type="submit">Create an event!</button>
+</form>
 {{!-- event {
 	name:""
 	description:""

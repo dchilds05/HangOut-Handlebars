@@ -27,7 +27,7 @@ router.post('/account/edit', imageUploader.single('imageUrl'), (req, res) => {
 
   const userId = req.session.user._id;
 
-  Object.keys(req.body) // This method returns an array of the object keys
+  Object.keys(req.body) // This returns an array of the object keys
   .forEach(key => (!req.body[key] && req.body[key] !== undefined) && delete req.body[key]);
 
   req.body.imageUrl = req.file.path;
@@ -70,9 +70,6 @@ router.get("/myEvents", notLoggedIn, (req, res) => {
   res.render("home/myOwnEvents", req.session.user);
   });
 
-router.get("/network", notLoggedIn, (req, res) => {
-  res.render("home/myNetwork", req.session.user);
-  });
 
 router.get("/upcomingEvents", notLoggedIn, (req, res) => {
   res.render("home/myUpcomingEvents", req.session.user);

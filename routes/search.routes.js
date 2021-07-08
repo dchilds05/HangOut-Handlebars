@@ -29,18 +29,22 @@ router.get("/", notLoggedIn, (req, res) => {
 
     //get the search input:
     const keyword = req.query.keyword;
-    const city = req.query.city;
-    let date;
+    const citySearched = req.query.city;
+    const date = req.query.date;
 
-    if (req.query.date) {date = req.query.date + "T" + req.query.time + ":00,*"}
-    else {date = ""}
+    let dateApi = date + "T00:00:00,*"
 
 
     //QUERY THE API:
     //create the URI for the API:
     let searchUri = uriTemplate.expand({
         resource: "events",
-        q: {size: "100", keyword, city, localStartDateTime: date},
+        q: {
+            size: "50", 
+            keyword, 
+            city: citySearched,
+            localStartDateTime: dateApi
+        },
         apikey: apiKey
       })
         
@@ -61,23 +65,37 @@ router.get("/", notLoggedIn, (req, res) => {
         }
 
     }).then(resultsFromApi => {
-        console.log(" >>>>>>>>> RESULTS API : ", resultsFromApi.length)
+        console.log(" >>>>>>>>> RESULTS API : ", resultsFromApi[0])
         //DB search
-        const searchString = keyword.split(" ").map(el=>`"${el}"`).join(" ");
+        const keywordString = keyword.split(" ").map(el=>`"${el}"`).join(" ");
 
-        Event.find({ $text: { $search: searchString } })
+        Event.find({ 
+            $and: [
+                {$text: { $search: keywordString }},
+                {"location.city": citySearched},
+                {"dateAndTime.date": { $gte: new Date(date) }}
+            ]              
+        })
         .then(resultsFromDB => {
+            console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB)
             resultsArray = resultsFromApi.concat(resultsFromDB)
-            console.log(" >>>>>>>>> RESULTS DB : ", resultsFromDB.length)
+            console.log(" >>>>>>>>> RESULTS ALL : ", resultsArray[0])
+
+            if(resultsArray || resultsArray.length > 1) {
+                resultsArray.sort((a, b) => {return new Date(a.dateAndTime.date) - new Date(b.dateAndTime.date)})
+            }
+
+
+            if(!resultsArray || resultsArray.length === 0){res.render("search/noSearchResults")}
+            else {res.render("search/searchResults" , {results: resultsArray})}
+
         }).catch(err => console.log(err))
         
+        console.log("test session : " , req.session.user)
     })
     .catch(err => console.log(err))
 
-
-    res.render("search/searchResults" , resultsArray)
 });
-
 
 //LEFT TO DO : 
 //-SORT RESULTS (BY DATE?)
