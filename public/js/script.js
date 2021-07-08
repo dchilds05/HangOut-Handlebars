@@ -6,13 +6,33 @@ document.addEventListener(
   false
 );
 
+//BURGER BUTTON FUNCTION
 var burgerButton = document.getElementById("clickBurger");
 var sideBar = document.getElementById("hiddenNav");
-burgerButton.addEventListener("click", () => {
-    console.log("clicked burger");
-    if (sideBar.style.display === "block") {
-      sideBar.style.display = "none";
-    } else {
-    sideBar.style.display = "block";
-    }
-})
+if(burgerButton){
+  burgerButton.addEventListener("click", () => {
+      if (sideBar.style.display === "block") {
+        sideBar.style.display = "none";
+      } else {
+      sideBar.style.display = "block";
+      }
+  })
+}
+
+
+//SLIDESHOW FUNCTION
+let slideIndex = 0;
+let frameId = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  if(frameId % 300 === 0) slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  frameId = requestAnimationFrame(showSlides);
+}

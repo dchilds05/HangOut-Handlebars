@@ -2,6 +2,8 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 0px;
   margin: 0px;
+  z-index: 0;
+  width: 100%;
 }
 
 a {
@@ -34,10 +36,24 @@ nav {
   height: 35px;
 }
 
-#navImg3 {
-  padding: 7px 15px 7px 7px;
+.layoutImageCropper {
+  width: 35px;
   height: 35px;
+  margin: 7px 15px 7px 7px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
 }
+
+#navImg3 {
+  display: inline;
+  margin: auto;
+  height: 100%;
+  width: auto; 
+}
+
 
 #hiddenNav {
   display: none;
@@ -47,6 +63,7 @@ nav {
   left: 0;
   padding: 0;
   margin: 0;
+  z-index: 1;
 }
 
 #hiddenNav li{
@@ -74,8 +91,130 @@ nav {
   color: black;
 }
 
+.imageCropper {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px auto 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
 #accountPagePhoto {
-  width: 200px;
-  display: block;
-  border-radius: 50%;  
+  display: inline;
+  margin: auto;
+  height: 100%;
+  width: auto; 
+}
+
+#indexMamaDiv {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width:100%;
+  min-width: 720px;
+}
+
+#indexLeft {
+  width: 60%;
+  text-align: center;
+}
+
+.slideshow-container, #indexLeft h1 {
+  width: 80%;
+  min-width: 400px;
+  position: relative;
+  margin: auto 10px auto auto;
+}
+
+#indexLeft h1{
+  font-size: 30px;
+}
+
+.mySlides {
+  display: none;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+#indexRight {
+  width: 40%;
+  height: 600px;
+  text-align: center;
+}
+
+#roundLogo {
+  width: 225px;
+  text-align: center;
+  margin: 10px 20px auto 10px;
+}
+
+.indexInput {
+  width: 250px;
+  height: 30px;
+  font-weight: 800;
+}
+
+#indexSignUp {
+  background-color: darkgray;
+}
+
+#signupMamaDiv {
+  display: flex;
+  width: 100%;
+  min-width: 900px;
+  height: 880px;
+}
+
+#signupSection1 {
+  width: 384px;
+  background-image: url(/images/signupBackground.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#signupSection2 {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupInput {
+  width: 250px;
+  height: 30px;
+}
+
+#signupRoundLogo {
+  width: 225px;
+  position: relative;
+  left: 300px;
+  top: 30px;
+  z-index:-1;
+}
+
+#signupH1 {
+  font-size: 35px;
+  position:relative;
+  right: 130px;
+  bottom: 170px;
+  text-align: center;
+}
+
+#signupForm {
+  position: relative;
+  bottom: 170px;
+  right: 120px;
 }

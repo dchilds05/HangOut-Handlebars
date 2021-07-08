@@ -96,7 +96,6 @@ router.get("/", notLoggedIn, (req, res) => {
 
 });
 
-
 //LEFT TO DO : 
 //-SORT RESULTS (BY DATE?)
 //array.sort(el, el2 => el.date .localcompare el2.date)

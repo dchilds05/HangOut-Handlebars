@@ -24,13 +24,13 @@ const eventSchema = new Schema({
 });
 
 eventSchema.index({
-	"name": 1,
-	"description": 1,
-	"type": 1,
-	"tags": 1,
-	"location.venueName": 1,
-	"location.city": 1,
-	"location.country": 1
+	"name": "text",
+	"description": "text",
+	"type":"text",
+	"tags": "text",
+	"location.venueName": "text",
+	"location.city": "text",
+	"location.country": "text"
 })
 
 const Event = model("Event", eventSchema);

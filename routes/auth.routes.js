@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const saltRounds = 10;
 
 const User = require("../models/User.model");
+const imageUploader = require('./../config/cloudinary')
 
 const loggedIn = require("../middleware/loggedIn");
 const notLoggedIn = require("../middleware/notLoggedIn");
@@ -19,14 +20,9 @@ router.get("/signup", loggedIn, (req, res) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", loggedIn, (req, res) => {
-  const { username, password } = req.body;
-
-  if (!username) {
-    return res
-      .status(400)
-      .render("auth/signup", { errorMessage: "Please provide your username." });
-  }
+router.post("/signup", imageUploader.single('imageUrl'), (req, res) => {
+  
+  const { username, password, email, city, age, imageUrl, createdEvents, savedEvents } = req.body;
 
   if (password.length < 8) {
     return res.status(400).render("auth/signup", {
@@ -45,10 +41,17 @@ router.post("/signup", loggedIn, (req, res) => {
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))
       .then((hashedPassword) => {
-        return User.create({
-          username,
+  
+        return User.create({ 
+          username: req.body.username, 
           password: hashedPassword,
-        });
+          email: req.body.email, 
+          city: req.body.city,
+          age: req.body.age,
+          imageUrl: req.file.path,
+          createdEvents: req.body.createdEvents,
+          savedEvents: req.body.savedEvents,
+        } );
       })
       .then((user) => {
         req.session.user = user;

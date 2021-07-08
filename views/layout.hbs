@@ -11,11 +11,15 @@
    </head>
 
    <body>
-      <nav>
-         <a href="javascript:void(0);"  id = "clickBurger"><img src="/images/hamburger.png" id = "navImg1" alt = "hamburger photo"></a>
-         <img id = "navImg2" src="/images/logoRectangleClose.png" alt = "logo">
-         <img id = "navImg3" src="/images/noPhoto.png" alt = "logo">
-      </nav>
+      {{#if _id}}
+         <nav>
+            <a href="javascript:void(0);"  id = "clickBurger"><img src="/images/hamburger.png" id = "navImg1" alt = "hamburger photo"></a>
+            <img id = "navImg2" src="/images/logoRectangleClose.png" alt = "logo">
+            <div class = "layoutImageCropper">
+               <img id = "navImg3" src={{imageUrl}} alt = "User Image">
+            </div>
+         </nav>
+      {{/if}}
 
       <ul id = "hiddenNav">
          <a href="/home"><li>Home</li></a>
