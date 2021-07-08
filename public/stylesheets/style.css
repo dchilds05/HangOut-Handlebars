@@ -14,6 +14,8 @@ h1 {
   color: 15px;
 }
 
+/* LAYOUT AND NAV BAR */
+
 nav {
   background-color: #3AC28A;
   position: relative;
@@ -91,23 +93,8 @@ nav {
   color: black;
 }
 
-.imageCropper {
-  width: 400px;
-  height: 400px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: 20px auto 0 auto;
-  display: flex;
-  justify-content: center;
-}
 
-#accountPagePhoto {
-  display: inline;
-  margin: auto;
-  height: 100%;
-  width: auto; 
-}
+/* INDEX PAGE */
 
 #indexMamaDiv {
   position: absolute;
@@ -170,6 +157,9 @@ nav {
   background-color: darkgray;
 }
 
+
+/*  SIGNUP PAGE  */
+
 #signupMamaDiv {
   display: flex;
   width: 100%;
@@ -218,3 +208,70 @@ nav {
   bottom: 170px;
   right: 120px;
 }
+
+
+/*  ACCOUNT PAGE  */
+
+#accountPageMamaDiv {
+  border: 1px solid red;
+}
+
+#accountPageSection1 {
+  border: 1px solid blue;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#accountSection1Div1 {
+  border: 1px solid orange;
+  width: 50%;
+}
+
+.imageCropper {
+  width: 225px;
+  height: 225px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#accountPagePhoto {
+  display: inline;
+  margin: auto;
+  height: 100%;
+  width: auto; 
+}
+
+#accountSection1Div2 {
+  border: 1px solid orange;
+  width: 50%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 30px;
+}
+
+#accountSection1Div2 h1 {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+#accountPageSection1 {
+  border: 1px solid blue;
+}
+
+#accountSection2Div1, #accountSection2Div2{
+  border: 1px solid orange;
+  margin-top: 50px;
+  height: 300px;
+  font-size: 25px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+

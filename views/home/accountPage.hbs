@@ -1,8 +1,73 @@
-<div class = "imageCropper">
-    <img src={{imageUrl}} alt="user photo" id="accountPagePhoto">
+<div id = "accountPageMamaDiv">
+    <section id = "accountPageSection1">
+        <div id = "accountSection1Div1">
+            <div class = "imageCropper">
+                <img src={{imageUrl}} alt="user photo" id="accountPagePhoto">
+            </div>
+        </div>
+        <div id = "accountSection1Div2">
+            <h1>{{toUpperCase username}}</h1>
+            <p>City: {{city}}</p>
+            <p>Email: {{email}}</p>
+            <p>Age: {{age}}</p>
+            <a href="/home/account/edit">Update your account details</a>
+        </div>
+    </section>
+
+    <section id = "accountPageSection2">
+        <div id = "accountSection2Div1">
+            <h1>SAVED EVENTS</h1>
+            <div id = "accountSavedEvents">
+                {{#each savedEvents}}
+                    <div class="column is-4">
+                        <div class="card medium">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    {{this.name}}
+                                </p>
+                            </header>
+                            <div class="card-image">
+                                <figure class="image">
+                                    <img src={{this.img}} alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    <h5 class="title"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div id = "accountSection2Div2">
+            <h1>CREATED EVENTS</h1>
+            <div id = "accountCreatedEvents">
+                {{#each createdEvents}}
+                    <div class="column is-4">
+                        <div class="card medium">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    {{this.name}}
+                                </p>
+                            </header>
+                            <div class="card-image">
+                                <figure class="image">
+                                    <img src={{this.img}} alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    <h5 class="title"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+
 </div>
-<h2>{{username}}</h2>
-
-<a href="/home/account/edit">Update your account details</a>
-
-<p>{{imageUrl}}</p>
