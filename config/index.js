@@ -35,6 +35,13 @@ module.exports = (app) => {
   })
   */
 
+  //HBS HELPER FUNCTIONS
+  Handlebars.registerHelper('isOwner', function (ownerId, userId) {
+    if (typeof ownerId === 'object') {
+      if (ownerId.equals(userId)) {return true} 
+    } else {return false}
+  });
+
   app.use(
     favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))
   );

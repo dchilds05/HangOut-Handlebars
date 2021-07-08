@@ -11,11 +11,74 @@ const saltRounds = 10;
 const imageUploader = require('./../config/cloudinary')
 
 
+
+
+const URI = require("urijs");
+const URITemplate = require('urijs/src/URITemplate');
+
+const convert = require("../helperFunctions/convertTmData");
+
+
+const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
+
+//CREATE URI
+let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?city*,apikey}`);
+
+
+
+
 router.get("/", notLoggedIn, (req, res) => {
+
   User.findById(req.session.user._id)
   .populate("createdEvents")
   .then((user) => {//NEED SORT METHOD HERE TO PUT IN ORDER BY DATE
-    res.render("home/home", user);
+
+    let upcomingEvents = user.savedEvents;
+
+    if(upcomingEvents.length > 1) {
+      upcomingEvents.sort((a, b) => {return new Date(a.dateAndTime.date) - new Date(b.dateAndTime.date)})
+    }
+
+  
+    let upcomingOwnEvents = user.createdEvents;
+
+    if(upcomingOwnEvents.length > 1) {
+      upcomingOwnEvents.sort((a, b) => {return new Date(a.dateAndTime.date) - new Date(b.dateAndTime.date)})
+    }
+
+    //Search for events near you, sorted:
+    
+    let userCity = user.city;
+
+    let searchUri = uriTemplate.expand({
+      city: userCity,
+      apikey: apiKey
+    })
+    console.log("search url: ", searchUri)
+
+    axios.get(searchUri).then(results => {
+      if (results.data._embedded && results.data._embedded.events) {
+        let events = results.data._embedded.events
+        let dataFromApi = events.map(convert)
+        if(dataFromApi.length > 1) {
+          dataFromApi.sort((a, b) => {
+            return new Date(a.dateAndTime.date) - new Date(b.dateAndTime.date)
+          })
+        }
+        return dataFromApi;
+      }
+      else {
+        let emptyArr = [];
+        console.log("no results from API query")
+        return emptyArr
+      }
+
+    })
+    .then(array => {
+      res.render("home/home", {user: user, events: array});
+    })
+    .catch(err => console.log(err))
+    
   })
 })
 

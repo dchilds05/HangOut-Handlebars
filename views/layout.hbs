@@ -21,12 +21,20 @@
             </div>
          </nav>
       {{/if}}
+      {{#if this.user._id}}
+         <nav>
+            <a href="javascript:void(0);"  id = "clickBurger"><img src="/images/hamburger.png" id = "navImg1" alt = "hamburger photo"></a>
+            <img id = "navImg2" src="/images/logoRectangleClose.png" alt = "logo">
+            <div class = "layoutImageCropper">
+               <img id = "navImg3" src={{this.user.imageUrl}} alt = "User Image">
+            </div>
+         </nav>
+      {{/if}}
 
       <ul id = "hiddenNav">
          <a href="/home"><li>Home</li></a>
          <a href="/home/account"><li>Account</li></a>
          <a href="/home/myEvents"><li>My Events</li></a>
-         <a href="/home/network"><li>Network</li></a>
          <a href="/home/upcomingEvents"><li>Upcoming Events</li></a>
          <a href="/auth/logout"><li>Log Out</li></a>
       </ul>

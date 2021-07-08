@@ -26,11 +26,27 @@
         </div>
     </div>
     <footer class="card-footer">
-        <a href="#" class="card-footer-item">Save</a>
+        <a nohref id="save-event" onclick="saveAnEvent('{{this._id}}')()" class="card-footer-item">Save</a>
+
+        {{#if this.urlForTickets}}
+        <a href={{this.urlForTickets}} class="card-footer-item">Buy Tickets</a>
+        {{/if}}
+
+        {{#if this.artistSiteUrl}}
+        <a href={{this.artistSiteUrl}} class="card-footer-item">Artist's Page</a>
+        {{/if}}
+
+        {{#if (isOwner this.owner ../user)}}
         <a href="#" class="card-footer-item">Edit</a>
         <a href="#" class="card-footer-item">Delete</a>
+        {{/if}}
     </footer>
 </div>
 </div>
 
 {{/each}}
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/functionsForHbs.js"></script>
