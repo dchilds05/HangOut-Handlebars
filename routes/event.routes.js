@@ -15,17 +15,14 @@ router.post("/create", (req, res) => {
     let location = {venueName, city, country}
     let dateAndTime= {date, time}
 
-    Event.create({name, type, tags, location, dateAndTime, artistSiteUrl, img, description})
+    Event.create({name, type, tags, location, dateAndTime, artistSiteUrl, img, description, owner: req.session.user._id})
     .then(event => {
-        Event.findByIdAndUpdate(event._id, { owner: req.session.user})
-        .then(event => {
-            //User.findByIdAndUpdate(req.session.user._id, {
-                //createdEvents: createdEvents.push(event)
-                console.log(event);
-                res.render("eventPages/event")
+        User.findByIdAndUpdate(req.session.user._id, {
+            $push: { createdEvents: event._id }
         })
-        .catch(err => console.log("error with event owner creation"))
+        .then(() => res.redirect("/home"))
     })
+    
     .catch(err => console.log(err))
 })
 
