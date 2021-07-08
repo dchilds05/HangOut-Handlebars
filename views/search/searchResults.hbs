@@ -3,11 +3,21 @@
 <br>
 <br>
 
+<div class="tile is-ancestor">
 
 {{#each results}}
 
-<div class="column is-4">
-<div class="card medium">
+        <div class="tile is-parent">
+              <div class="tile is-parent">
+    <article class="tile is-child box">
+      <p class="title">Hello World</p>
+      <p class="subtitle">What is up?</p>
+    </article>
+  </div>
+        </div>
+
+{{!-- 
+<div class="card tile is-child">
     <header class="card-header">
         <p class="card-header-title">
           {{this.name}}
@@ -43,10 +53,11 @@
     </footer>
 </div>
 </div>
-
+</div>
+ --}}
 {{/each}}
 
-
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/functionsForHbs.js"></script>

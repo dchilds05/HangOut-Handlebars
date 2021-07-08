@@ -78,6 +78,7 @@ router.get("/", notLoggedIn, (req, res) => {
         })
         .then(resultsFromDB => {
             resultsArray = resultsFromApi.concat(resultsFromDB)
+            console.log("db results: ", resultsFromDB)
 
             if(resultsArray || resultsArray.length > 1) {
                 resultsArray.sort((a, b) => {return new Date(a.dateAndTime.date) - new Date(b.dateAndTime.date)})
@@ -85,7 +86,7 @@ router.get("/", notLoggedIn, (req, res) => {
 
 
             if(!resultsArray || resultsArray.length === 0){res.render("search/noSearchResults")}
-            else {res.render("search/searchResults" , {results: resultsArray})}
+            else {res.render("search/searchResults" , {results: resultsArray, user: req.session.user._id})}
 
         }).catch(err => console.log(err))
         
