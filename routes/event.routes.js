@@ -2,8 +2,6 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const axios = require('axios');
 
-const URI = require("urijs");
-const URITemplate = require('urijs/src/URITemplate');
 
 const User = require("../models/User.model");
 const Event = require("../models/Event.model")
@@ -21,6 +19,21 @@ const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
 
 const imageUploader = require('./../config/cloudinary')
 
+const URI = require("urijs");
+const URITemplate = require('urijs/src/URITemplate');
+
+const convert = require("../helperFunctions/convertTmData");
+
+let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?id,apikey}`);
+
+
+
+const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
+
+
+
+
+//CREATE EVENT PAGES 
 router.get("/create", (req, res) => {
     res.render("eventPages/createEvent")
 })
@@ -77,6 +90,46 @@ router.post("/:id/fav", (req, res) => {
 
 
 })
+
+
+//SAVE AN EVENT POST ROUTE 
+router.post("/:id/fav", (req, res) => {
+    
+    const eventId = req.params.id
+    const userId = req.session.user._id
+
+    console.log("user: ", userId, "event: ", eventId)
+
+    Event.findById(eventId)
+    .then(eventFound => {
+        User.findByIdAndUpdate(userId, {
+            $push: {savedEvents: eventFound}
+        }).then(user => console.log("user was updated"))
+        console.log("this event is ours")
+    })
+    .catch(eventNotFound => {
+        let eventUri = uriTemplate.expand({
+            id: eventId,
+            apikey: apiKey
+        })
+
+        axios.get(eventUri).then(result => {
+            let eventFromApi = convert(result.data._embedded.events[0]);
+            return eventFromApi
+        }).then(eventFromApi => {
+            User.findByIdAndUpdate(userId, {
+                $push: {savedEvents: eventFromApi}
+            }).then(user => console.log("user was updated"))
+            console.log("this event: ", eventFromApi, " is not ours")
+        })
+    })
+
+
+})
+
+
+
+//EVENT PAGES MAIN ROUTE
 
 router.get("/", (req, res) => {
     res.render("eventPages/event")

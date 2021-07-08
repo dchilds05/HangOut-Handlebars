@@ -4,10 +4,21 @@
 <br>
 <br>
 
+<div class="cards">
 
 {{#each results}}
 
-<div class="column is-4">
+<div class="card">ONE</div>
+
+
+{{/each}}
+
+</div>
+
+
+
+{{!-- 
+<div class="column is-one-quarter">
 <div class="card medium">
     <header class="card-header">
         <p class="card-header-title">
@@ -45,14 +56,14 @@
         </div>
     </div>
     <footer class="card-footer">
-        <a href="#" id="save-event" onclick="favEvent('{{this._id}}')()" class="card-footer-item">Save</a>
+        <a nohref id="save-event" onclick="saveAnEvent('{{this._id}}')()" class="card-footer-item">Save</a>
 
         {{#if this.urlForTickets}}
-        <a href={{this.urlForTickets}} class="card-footer-item">Buy Tickets</a>
+        <a href={{this.urlForTickets}} target="_blank" class="card-footer-item">Buy Tickets</a>
         {{/if}}
 
         {{#if this.artistSiteUrl}}
-        <a href={{this.artistSiteUrl}} class="card-footer-item">Artist's Page</a>
+        <a href={{this.artistSiteUrl}} target="_blank" class="card-footer-item">Artist's Page</a>
         {{/if}}
 
         {{#if (isOwner this.owner ../user)}}
@@ -62,9 +73,7 @@
     </footer>
 </div>
 </div>
-
-{{/each}}
-
+ --}}
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/js/functionnalitiesForHBS.js"></script>
+<script src="/js/functionsForHbs.js"></script>
