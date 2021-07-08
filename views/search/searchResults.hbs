@@ -20,21 +20,8 @@
     </div>
     <div class="card-content">
         <div class="content">
-            <h3 class="title">{{this.name}} - in {{this.location.city}}</h3>
+
             <h5 class="title"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
-            
-
-
-            {{this.description}} <br>
-
-            {{#if this.urlForTickets}}
-            <a href="{{this.urlForTickets}}">Get tickets</a><br>
-            {{/if}} 
-
-            {{#if this.artistSiteUrl}}
-            <a href="{{this.artistSiteUrl}}">Artist's page</a><br>
-            {{/if}}
-            
 
         </div>
     </div>
