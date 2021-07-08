@@ -3,21 +3,22 @@
 <br>
 <br>
 
-<div class="tile is-ancestor">
+<div class="cards">
 
 {{#each results}}
 
-        <div class="tile is-parent">
-              <div class="tile is-parent">
-    <article class="tile is-child box">
-      <p class="title">Hello World</p>
-      <p class="subtitle">What is up?</p>
-    </article>
-  </div>
-        </div>
+<div class="card">ONE</div>
+
+
+{{/each}}
+
+</div>
+
+
 
 {{!-- 
-<div class="card tile is-child">
+<div class="column is-one-quarter">
+<div class="card medium">
     <header class="card-header">
         <p class="card-header-title">
           {{this.name}}
@@ -39,11 +40,11 @@
         <a nohref id="save-event" onclick="saveAnEvent('{{this._id}}')()" class="card-footer-item">Save</a>
 
         {{#if this.urlForTickets}}
-        <a href={{this.urlForTickets}} class="card-footer-item">Buy Tickets</a>
+        <a href={{this.urlForTickets}} target="_blank" class="card-footer-item">Buy Tickets</a>
         {{/if}}
 
         {{#if this.artistSiteUrl}}
-        <a href={{this.artistSiteUrl}} class="card-footer-item">Artist's Page</a>
+        <a href={{this.artistSiteUrl}} target="_blank" class="card-footer-item">Artist's Page</a>
         {{/if}}
 
         {{#if (isOwner this.owner ../user)}}
@@ -53,11 +54,7 @@
     </footer>
 </div>
 </div>
-</div>
  --}}
-{{/each}}
-
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/functionsForHbs.js"></script>
