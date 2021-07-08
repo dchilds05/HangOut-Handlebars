@@ -27,7 +27,13 @@ router.post("/create", (req, res) => {
 
 })
 
-
+router.post("/:id/fav", (req, res) => {
+    const userId = req.session.user._id
+    const eventId = req.params.id
+    User.findByIdAndUpdate(userId, {
+        $addToSet: {favEvents: eventId}
+    })
+})
 
 router.get("/", (req, res) => {
     res.render("eventPages/event")

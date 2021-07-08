@@ -15,7 +15,7 @@ const userSchema = new Schema({
 		default: '/images/noPhoto.png'
 	},
   createdEvents: [{ type: Schema.Types.ObjectId, ref: "Event" }],
-	savedEvents: [
+	favEvents: [
     [{ type: Schema.Types.ObjectId, ref: "Event" }], 
     [{ 
       name: String,

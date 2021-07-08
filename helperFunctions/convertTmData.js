@@ -4,6 +4,7 @@ function convertTmData (TmObject) {
     let newObject = {};
 
     newObject.name = TmObject.name;
+    newObject._id = TmObject.id;
     newObject.type = [TmObject.type];
     newObject.urlForTickets = TmObject.url;
     newObject.img = TmObject.images[0].url;
@@ -53,8 +54,10 @@ function convertTmData (TmObject) {
         if(TmObject._embedded.attractions && TmObject._embedded.attractions[0].externalLinks && TmObject._embedded.attractions[0].externalLinks.homepage){
             newObject.artistSiteUrl = TmObject._embedded.attractions[0].externalLinks.  homepage[0].url
         } 
-        else if (TmObject._embedded.attractions || TmObject._embedded.attractions.length === 1) {
+        else if (TmObject._embedded.attractions) {
+            if(TmObject._embedded.attractions.length === 1) {
             newObject.artistSiteUrl = TmObject._embedded.attractions[0].url;
+            } else {newObject.artistSiteUrl = "";}
         } 
         else {
             newObject.artistSiteUrl = "";
