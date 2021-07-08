@@ -53,7 +53,7 @@ function convertTmData (TmObject) {
         if(TmObject._embedded.attractions && TmObject._embedded.attractions[0].externalLinks && TmObject._embedded.attractions[0].externalLinks.homepage){
             newObject.artistSiteUrl = TmObject._embedded.attractions[0].externalLinks.  homepage[0].url
         } 
-        else if (TmObject._embedded.attractions) {
+        else if (TmObject._embedded.attractions || TmObject._embedded.attractions.length === 1) {
             newObject.artistSiteUrl = TmObject._embedded.attractions[0].url;
         } 
         else {

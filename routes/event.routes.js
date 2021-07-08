@@ -19,7 +19,7 @@ router.post("/create", (req, res) => {
     .then(event => {
         Event.findByIdAndUpdate(event._id, { owner: req.session.user})
         .then(event => {
-            console.log(event)
+            console.log("the event was created", event)
             res.render("eventPages/event")
         }).catch(err => console.log("error with event owner creation"))
     })

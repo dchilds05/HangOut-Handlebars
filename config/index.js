@@ -6,6 +6,14 @@ const path = require("path");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const MONGO_URI = require("../utils/consts");
+const Handlebars = require("hbs")
+
+const mongoose = require("mongoose");
+
+const User = require("../models/User.model");
+const Event = require("../models/Event.model")
+
+
 
 // Middleware configuration
 module.exports = (app) => {
@@ -18,6 +26,21 @@ module.exports = (app) => {
   app.set("views", path.join(__dirname, "..", "views"));
   app.set("view engine", "hbs");
   app.use(express.static(path.join(__dirname, "..", "public")));
+
+
+
+
+
+  //HBS HELPER FUNCTIONS
+  Handlebars.registerHelper('isOwner', function (ownerId, userId) {
+    if (typeof ownerId === 'object') {
+      if (ownerId.equals(userId)) {return true} 
+    } else {return false}
+  });
+
+
+
+
 
   app.use(
     favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))

@@ -15,7 +15,14 @@ const userSchema = new Schema({
 		default: '/images/noPhoto.png'
 	},
   createdEvents: [{ type: Schema.Types.ObjectId, ref: "Event" }],
-	savedEvents: [ [{ type: Schema.Types.ObjectId, ref: "Event" }] , [{ type: "text"}] ]
+	savedEvents: [
+    [{ type: Schema.Types.ObjectId, ref: "Event" }], 
+    [{ 
+      name: String,
+      apiId: String,
+      date: String
+    }] 
+  ]
 });
 
 const User = model("User", userSchema);

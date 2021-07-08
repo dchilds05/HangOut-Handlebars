@@ -11,8 +11,9 @@ const Event = require("../models/Event.model");
 
 
 const convert = require("../helperFunctions/convertTmData");
+const isOwner = require("../helperFunctions/isOwner");
 const notLoggedIn = require("../middleware/notLoggedIn");
-const findByValue = require("../helperFunctions/findByValue");
+
 
 
 const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
@@ -85,16 +86,31 @@ router.get("/", notLoggedIn, (req, res) => {
             }
 
 
-            if(!resultsArray || resultsArray.length === 0){res.render("search/noSearchResults")}
-            else {res.render("search/searchResults" , {results: resultsArray})}
+            if(!resultsArray || resultsArray.length === 0){
+                res.render("search/noSearchResults")
+            }
+            else {
+                res.render("search/searchResults" , {results: resultsArray, user: req.session.user._id})
+            }
 
         }).catch(err => console.log(err))
         
-        console.log("test session : " , req.session.user)
+        console.log("test session : " , req.session.user._id)
     })
     .catch(err => console.log(err))
 
 });
+
+
+router.get("/seeAll", (req, res, next) => {
+    Event.find().then(eventsList => {
+        console.log("list is ", eventsList.length, "docs.")
+        res.render("home/home", {done: "I am done"})
+    }).catch(err => console.log(err))
+
+})
+
+
 
 //LEFT TO DO : 
 //-SORT RESULTS (BY DATE?)

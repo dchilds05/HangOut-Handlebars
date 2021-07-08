@@ -17,7 +17,6 @@ const eventSchema = new Schema({
     },
 	urlForTickets: String,
 	img: String,
-	owner: String,
 	artistSiteUrl: String,
 	owner: { type: Schema.Types.ObjectId, ref: "User" },
 	followers: [{ type: Schema.Types.ObjectId, ref: "User" }]
