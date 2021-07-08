@@ -8,10 +8,11 @@ const URITemplate = require('urijs/src/URITemplate');
 
 const seeds = require("../seedData/events.json")
 const Event = require("../models/Event.model");
+const User = require("../models/User.model");
+
 
 
 const convert = require("../helperFunctions/convertTmData");
-const isOwner = require("../helperFunctions/isOwner");
 const notLoggedIn = require("../middleware/notLoggedIn");
 
 
@@ -101,14 +102,6 @@ router.get("/", notLoggedIn, (req, res) => {
 
 });
 
-
-router.get("/seeAll", (req, res, next) => {
-    Event.find().then(eventsList => {
-        console.log("list is ", eventsList.length, "docs.")
-        res.render("home/home", {done: "I am done"})
-    }).catch(err => console.log(err))
-
-})
 
 
 

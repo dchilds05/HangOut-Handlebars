@@ -1,8 +1,24 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
+const axios = require('axios');
+
+const URI = require("urijs");
+const URITemplate = require('urijs/src/URITemplate');
 
 const User = require("../models/User.model");
 const Event = require("../models/Event.model")
+const convert = require("../helperFunctions/convertTmData");
+
+let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?id,apikey}`);
+
+
+
+const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
+
+
+
+
+
 
 router.get("/create", (req, res) => {
     res.render("eventPages/createEvent")
@@ -36,24 +52,26 @@ router.post("/:id/fav", (req, res) => {
 
     Event.findById(eventId)
     .then(eventFound => {
-        let newEvent = {
-            source: "Hangout",
-            id: eventFound._id
-        }
         User.findByIdAndUpdate(userId, {
-            $push: {favEvents: newEvent}
+            $push: {savedEvents: eventFound}
         }).then(user => console.log("user was updated"))
         console.log("this event is ours")
     })
     .catch(eventNotFound => {
-        let newEvent = {
-            source: "TicketMaster",
-            id: eventId
-        }
-        User.findByIdAndUpdate(userId, {
-            $push: {favEvents: newEvent}
-        }).then(user => console.log("user was updated"))
-        console.log("this event: ", newEvent, " is not ours")
+        let eventUri = uriTemplate.expand({
+            id: eventId,
+            apikey: apiKey
+        })
+
+        axios.get(eventUri).then(result => {
+            let eventFromApi = convert(result.data._embedded.events[0]);
+            return eventFromApi
+        }).then(eventFromApi => {
+            User.findByIdAndUpdate(userId, {
+                $push: {savedEvents: eventFromApi}
+            }).then(user => console.log("user was updated"))
+            console.log("this event: ", eventFromApi, " is not ours")
+        })
     })
 
 
