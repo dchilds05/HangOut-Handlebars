@@ -40,6 +40,19 @@ module.exports = (app) => {
 
 
 
+  //UPPERCASE HELPER
+  Handlebars.registerHelper('toUpperCase', function(str) {
+    return str.toUpperCase();
+  });
+
+  //FIND EVENT BY ID HELPER
+  /*
+  Handlebars.registerHelper("findEventById", function(str) {
+    Event.findById(str)
+    .then((event) => {
+        return event;
+  })
+  */
 
   app.use(
     favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))

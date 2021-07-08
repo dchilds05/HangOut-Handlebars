@@ -19,19 +19,20 @@ const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
 
 
 
+const imageUploader = require('./../config/cloudinary')
 
 router.get("/create", (req, res) => {
     res.render("eventPages/createEvent")
 })
 
-router.post("/create", (req, res) => {
+router.post("/create", imageUploader.single('img'), (req, res) => {
 
     const {name, type, tags, artistSiteUrl, img, description, venueName, city, country, date, time} = req.body;
 
     let location = {venueName, city, country}
     let dateAndTime = {date, time};
 
-    Event.create({name, type, tags, location, dateAndTime, artistSiteUrl, img, description})
+    Event.create({name, type, tags, location, dateAndTime, artistSiteUrl, img: req.file.path, description, owner: req.session.user._id})
     .then(event => {
         Event.findByIdAndUpdate(event._id, { owner: req.session.user})
         .then(event => {
@@ -39,8 +40,8 @@ router.post("/create", (req, res) => {
             res.render("eventPages/event")
         }).catch(err => console.log("error with event owner creation"))
     })
+    
     .catch(err => console.log(err))
-
 })
 
 router.post("/:id/fav", (req, res) => {

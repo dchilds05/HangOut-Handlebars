@@ -1,7 +1,60 @@
-<h1>Welcome home!</h1>
-
-
 {{!-- <p>Example of event: {{eventName}} </p> --}}
+<div id = "homeMamaDiv">
+    <section id = "homeSection1">
+        <form action="/search" method="GET">
+            <input class = "formElement" type="text" name="keyword" placeholder="KEYWORDS(s)*" required>
+            <input class = "formElement" type="text" name="city" placeholder="CITY*" required>
+            <input class = "formElement" type="date" name="date*" required>
+            <button class = "searchFormButton" type="submit">SEARCH</button>
+        </form>
+    </section>
+
+    <section id = "homeSection2">
+
+        <div id = "homeSection2Div1">
+            <h1>Your next event!</h1>
+            <section class = "createdEventsIndividualSection"> 
+                <div>
+                    <p class = "title">{{this.createdEvents.[0].name}}</p>
+                </div>
+                <div>
+                    <img class = "eachImage" src={{this.createdEvents.[0].img}} alt="Placeholder image">
+                </div>
+                    <div class = "lastDiv">
+                    <h5 class="dateTime"><time datetime="2016-1-1">{{this.createdEvents.[0].dateAndTime.date}} {{#if this.createdEvents.[0].dateAndTime.time}} - {{this.createdEvents.[0].dateAndTime.time}} {{/if}}</time></h5>
+                </div>
+            </section>  
+        </div>
+
+        <div id = "homeSection2Div2">
+            <h1>Create a new event</h1>
+            <div>
+            <a href="/event/create"><button>+</button></a>
+            </div>
+        </div>
+
+    </section>
+
+    <section id = "homeSection3">
+        <h1>Events near you...</h1>
+        <div id = "accountCreatedEvents">
+            {{#each this.createdEvents}}
+                <section class = "createdEventsIndividualSection"> 
+                    <div>
+                        <p class = "title">{{name}}</p>
+                    </div>
+                    <div>
+                        <img class = "eachImage" src={{img}} alt="Placeholder image">
+                    </div>
+                        <div class = "lastDiv">
+                        <h5 class="dateTime"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
+                    </div>
+                </section>  
+            {{/each}}
+        </div>
+    </section>
+
+</div>
 
 <a href="/event/create"><button>Create an Event</button></a>
 
@@ -24,5 +77,4 @@
 </form>
 
 
-<h2>{{done}}</h2>
 

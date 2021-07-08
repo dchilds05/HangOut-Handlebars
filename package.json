@@ -10,7 +10,6 @@
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "bulma-start": "0.0.4",
-    "bulma": "^0.9.3",
     "cloudinary": "^1.26.2",
     "connect-mongo": "^4.4.1",
     "cookie-parser": "^1.4.5",

@@ -14,6 +14,8 @@ h1 {
   color: 15px;
 }
 
+/* LAYOUT AND NAV BAR */
+
 nav {
   background-color: #3AC28A;
   position: relative;
@@ -28,12 +30,12 @@ nav {
 
 #navImg1 {
   padding: 9px 7px 7px 15px;
-  height: 25px;
+  height: 35px;
 }
 
 #navImg2 {
   padding: 7px;
-  height: 35px;
+  height: 45px;
 }
 
 .layoutImageCropper {
@@ -91,23 +93,8 @@ nav {
   color: black;
 }
 
-.imageCropper {
-  width: 400px;
-  height: 400px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: 20px auto 0 auto;
-  display: flex;
-  justify-content: center;
-}
 
-#accountPagePhoto {
-  display: inline;
-  margin: auto;
-  height: 100%;
-  width: auto; 
-}
+/* INDEX PAGE */
 
 #indexMamaDiv {
   position: absolute;
@@ -170,6 +157,9 @@ nav {
   background-color: darkgray;
 }
 
+
+/*  SIGNUP PAGE  */
+
 #signupMamaDiv {
   display: flex;
   width: 100%;
@@ -218,3 +208,187 @@ nav {
   bottom: 170px;
   right: 120px;
 }
+
+
+/*  ACCOUNT PAGE  */
+
+#accountPageSection1 {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#accountSection1Div1 {
+  width: 50%;
+}
+
+.imageCropper {
+  width: 225px;
+  height: 225px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#accountPagePhoto {
+  display: inline;
+  margin: auto;
+  height: 100%;
+  width: auto; 
+}
+
+#accountSection1Div2 {
+  width: 50%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 30px;
+}
+
+#accountSection1Div2 h1 {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+#accountSection2Div1, #accountSection2Div2{
+  margin-top: 50px;
+  height: 300px;
+  font-size: 25px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#accountCreatedEvents {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.createdEventsIndividualSection {
+  display: inline-block;
+  width: 350px;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.createdEventsIndividualSection:hover {
+  background-color: #777;
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.eachImage {
+  height: 200px;
+}
+
+.lastDiv {
+  color: black;
+} 
+
+.dateTime {
+  font-size: 15px;
+  margin-top: 15px;
+  white-space: normal;
+}
+
+
+
+/* HOME PAGE  */
+
+#homeMamaDiv {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+#homeSection1 {
+  margin-top: 50px;
+  width: 100%;
+}
+
+#homeSection1 form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.formElement {
+  height: 40px;
+  width: 23%;
+  min-width: 100px;
+}
+
+.searchFormButton {
+  height: 40px;
+  width: 100px;
+}
+
+#homeSection2 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 80px;
+  width: 100%;
+}
+
+#homeSection2Div1 {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#homeSection2Div1 h1 {
+  position: absolute;
+  top: 190px;
+  font-size: 25px;
+  font-weight: 600px;
+}
+
+#homeSection2Div1 .createdEventsIndividualSection {
+  border: 2px solid rgb(88, 88, 88);
+  border-radius: 10%;
+}
+
+#homeSection2Div2 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+#homeSection2Div2 button {
+  width: 100px;
+  height: 100px;
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 30px;
+  border-radius: 20%;
+}
+
+#homeSection3 {
+  margin-top: 100px;
+  width: 100%;
+  font-size: 30px;
+  font-weight: 600px;
+}
+
+#homeSection3 h1 {
+  position: absolute;
+  bottom: -30px;
+  left: 41%;
+  width: 300px;
+}
+
+
