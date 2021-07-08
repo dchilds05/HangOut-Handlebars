@@ -15,35 +15,8 @@
     </section>
 
     <section id = "accountPageSection2">
-        <div id = "accountSection2Div1">
-            <h1>SAVED EVENTS</h1>
-            <div id = "accountSavedEvents">
-                {{#each savedEvents}}
-                    <div class="column is-4">
-                        <div class="card medium">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    {{this.name}}
-                                </p>
-                            </header>
-                            <div class="card-image">
-                                <figure class="image">
-                                    <img src={{this.img}} alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="card-content">
-                                <div class="content">
-                                    <h5 class="title"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
-        </div>
-
         <div id = "accountSection2Div2">
-            <h1>CREATED EVENTS</h1>
+            <h1>CREATED EVENTS</h1><br>
             <div id = "accountCreatedEvents">
                 {{#each createdEvents}}
                     <section class = "createdEventsIndividualSection"> 
@@ -57,25 +30,27 @@
                             <h5 class="dateTime"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
                         </div>
                     </section>  
-                    <!--<div class="column is-4">
-                        <div class="card medium">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    {{name}}
-                                </p>
-                            </header>
-                            <div class="card-image">
-                                <figure class="image">
-                                    <img src={{img}} alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="card-content">
-                                <div class="content">
-                                    <h5 class="title"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
-                                </div>
-                            </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <br><br><br><br>
+
+        <div id = "accountSection2Div2">
+            <h1>SAVED EVENTS</h1><br>
+            <div id = "accountCreatedEvents">
+                {{#each createdEvents}}
+                    <section class = "createdEventsIndividualSection"> 
+                        <div>
+                            <p class = "title">{{name}}</p>
                         </div>
-                    </div> -->
+                        <div>
+                            <img class = "eachImage" src={{img}} alt="Placeholder image">
+                        </div>
+                         <div class = "lastDiv">
+                            <h5 class="dateTime"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
+                        </div>
+                    </section>  
                 {{/each}}
             </div>
         </div>

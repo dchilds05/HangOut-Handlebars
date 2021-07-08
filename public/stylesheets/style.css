@@ -254,9 +254,6 @@ nav {
   font-weight: 600;
 }
 
-#accountPageSection1 {
-}
-
 #accountSection2Div1, #accountSection2Div2{
   margin-top: 50px;
   height: 300px;
@@ -307,37 +304,91 @@ nav {
 /* HOME PAGE  */
 
 #homeMamaDiv {
- border: 1px solid red;
  display: flex;
  flex-direction: column;
+ align-items: center;
 }
 
 #homeSection1 {
-  border: 1px solid blue;
+  margin-top: 50px;
+  width: 100%;
 }
 
 #homeSection1 form {
-
-}
-
-#homeSection2 {
-  border: 1px solid blue;
+  width: 100%;
   display: flex;
- flex-direction: row;
+  justify-content: center;
+  
+}
+
+.formElement {
+  height: 40px;
+  width: 23%;
+  min-width: 100px;
+}
+
+.searchFormButton {
+  height: 40px;
+  width: 100px;
 }
 
 #homeSection2 {
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: row;
+  margin-top: 80px;
+  width: 100%;
 }
 
 #homeSection2Div1 {
-  border: 1px solid green;
   width: 50%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#homeSection2Div1 h1 {
+  position: absolute;
+  top: 190px;
+  font-size: 25px;
+  font-weight: 600px;
+}
+
+#homeSection2Div1 .createdEventsIndividualSection {
+  border: 2px solid rgb(88, 88, 88);
+  border-radius: 10%;
 }
 
 #homeSection2Div2 {
-  border: 1px solid green;
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+#homeSection2Div2 button {
+  width: 100px;
+  height: 100px;
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 30px;
+  border-radius: 20%;
+}
+
+#homeSection3 {
+  margin-top: 100px;
+  width: 100%;
+  font-size: 30px;
+  font-weight: 600px;
+}
+
+#homeSection3 h1 {
+  position: absolute;
+  bottom: -30px;
+  left: 41%;
+  width: 300px;
 }
 
 

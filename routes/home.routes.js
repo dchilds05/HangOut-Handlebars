@@ -12,8 +12,12 @@ const imageUploader = require('./../config/cloudinary')
 
 
 router.get("/", notLoggedIn, (req, res) => {
-  res.render("home/home" , req.session.user);
-  });
+  User.findById(req.session.user._id)
+  .populate("createdEvents")
+  .then((user) => {//NEED SORT METHOD HERE TO PUT IN ORDER BY DATE
+    res.render("home/home", user);
+  })
+})
 
 router.get("/account", notLoggedIn, (req, res) => {
   User.findById(req.session.user._id)
