@@ -87,7 +87,7 @@ router.get("/", notLoggedIn, (req, res) => {
 
 
             if(!resultsArray || resultsArray.length === 0){res.render("search/noSearchResults")}
-            else {res.render("search/searchResults" , {results: resultsArray, user: req.session.user._id})}
+            else {res.render("search/searchResults" , {results: resultsArray, user: req.session.user})}
 
         }).catch(err => console.log(err))
         

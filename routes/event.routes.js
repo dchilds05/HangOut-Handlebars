@@ -7,29 +7,13 @@ const User = require("../models/User.model");
 const Event = require("../models/Event.model")
 const convert = require("../helperFunctions/convertTmData");
 
-let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?id,apikey}`);
-
-
-
 const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
-
-
-
-
-
 const imageUploader = require('./../config/cloudinary')
 
 const URI = require("urijs");
 const URITemplate = require('urijs/src/URITemplate');
 
-const convert = require("../helperFunctions/convertTmData");
-
 let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?id,apikey}`);
-
-
-
-const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
-
 
 
 
