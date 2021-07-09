@@ -1,1 +1,27 @@
-<h1>Event Page</h1>
+<h1>{{name}}</h1>
+
+<h2>{{location.venueName}}</h2>
+<h2>{{location.city}}</h2>
+<h2>{{location.country}}</h2>
+
+<img src="{{img}}" alt="event image">
+
+<h3>{{dateAndTime.date}}</h3>
+<h3>{{dateAndTime.time}}</h3>
+
+<a href="{{urlForTickets}}"><h4>Get tickets here!</h4></a>
+
+<a href="{{artistSiteUrl}}"><h4>Artist Info</h4></a>
+
+<h4>Creator of this event: {{owner.name}}</h4>
+
+<h4>People attending this event:<br>
+    <ul>
+        {{#each followers}}
+            <li>
+            <p>{{this.username}}</p>
+            <img src = "{{this.imageUrl}}"
+            </li>
+        {{/each}}
+    </ul>
+</h4>
