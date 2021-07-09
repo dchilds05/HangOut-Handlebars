@@ -8,19 +8,20 @@ const URITemplate = require('urijs/src/URITemplate');
 
 const seeds = require("../seedData/events.json")
 const Event = require("../models/Event.model");
+const User = require("../models/User.model");
+
 
 
 const convert = require("../helperFunctions/convertTmData");
 const notLoggedIn = require("../middleware/notLoggedIn");
-const findByValue = require("../helperFunctions/findByValue");
 
 
-const apiKey = process.env.APIKEY;
+
+const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
 
 
 //CREATE URI
 let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/{resource}.json{?q*,apikey}`);
-
 
 
 //SEARCH API THEN DB THEN CONCAT RESULTS
@@ -85,16 +86,19 @@ router.get("/", notLoggedIn, (req, res) => {
             }
 
 
-            if(!resultsArray || resultsArray.length === 0){res.render("search/noSearchResults")}
-            else {res.render("search/searchResults" , {results: resultsArray, user: req.session.user._id})}
+            if(!resultsArray || resultsArray.length === 0){res.render("search/noSearchResults", {user: req.session.user})}
+            else {res.render("search/searchResults" , {results: resultsArray, user: req.session.user})}
 
         }).catch(err => console.log(err))
         
-        console.log("test session : " , req.session.user)
+        console.log("test session : " , req.session.user._id)
     })
     .catch(err => console.log(err))
 
 });
+
+
+
 
 //LEFT TO DO : 
 //-SORT RESULTS (BY DATE?)

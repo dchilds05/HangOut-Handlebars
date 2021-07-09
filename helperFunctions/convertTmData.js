@@ -22,9 +22,9 @@ function convertTmData (TmObject) {
 
     if(TmObject.classifications) {
         newObject.tags = [
-            TmObject.classifications[0].segment.name, 
-            TmObject.classifications[0].genre.name, 
-            TmObject.classifications[0].subGenre.name
+            TmObject.classifications[0].segment ? TmObject.classifications[0].segment.name : "", 
+            TmObject.classifications[0].genre ? TmObject.classifications[0].genre.name : "",
+            TmObject.classifications[0].subGenre ? TmObject.classifications[0].subGenre.name : "",
         ];
     } else {
         newObject.tags = "";
