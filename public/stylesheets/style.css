@@ -470,4 +470,190 @@ nav {
 
 
 
+/* MORGANE'S CODE HEYYY */
+
+
+.product-search {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+  margin: 0 auto;
+  box-shadow: rgba(0,0,0,.172549) 0 6px 12px 0;
+  cursor: pointer;
+  width: 70%;
+}
+
+.search-element {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  border-right: 1px solid rgba(10,10,10,.1);
+  padding: 1em;
+}
+
+.keywords-search {
+  width: 30%;
+}
+
+.search-label {
+  font-weight: 700;
+}
+
+.search-input {
+  border: none;
+  appearance: none;
+  outline: none;
+  width: 100%;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  margin-top: 5px;
+}
+
+.search-input:focus {
+  box-shadow: 0px 2px 0px 0px tomato;
+}
+
+.search-button {
+  display: inline-block;
+  flex-grow: 1;
+  height: 80px;
+  line-height: 80px;
+  padding: 0 2em;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 100;
+  border: 0;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: white;
+  background-color: rgb(135, 206, 235);
+  transition: background-color 0.8s ease;
+}
+
+.search-button:hover {
+  background-color: HSLA(345, 100%, 60%, 1.00);
+}
+
+
+.morgane { padding: 1rem; }
+
+
+.cards {
+
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 15px -4px rgba(0, 0, 0, 0.7);
+  border-radius: 2%;
+  position: relative;
+}
+
+
+.result-card-header {
+  align-self: left;
+}
+
+
+.card img {
+  width: 100%
+}
+
+.result-card-content {
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+
+.result-card-footer {
+  height: 60px;
+  width:100%;
+  position:absolute;
+  left: 0;
+  bottom: 0;
+
+}
+
+
+.result-card-button {
+  text-decoration: none;
+  color: black;
+  font-size: medium;
+}
+
+.result-card-footer div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.result-card-footer button {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: none;
+  display: flex;
+  box-shadow: 0px 0px 10px -4px rgba(58, 194, 138,.7);
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+/* EVENT DETAILS PAGE */
+
+#eventMamaDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid red 1px;
+}
+
+#eventTitle {
+  font-size: 50px;
+  font-weight: 800px;
+  margin: 30px auto 30px auto;
+  text-align: center;
+}
+
+#eventImage {
+  margin: 0 0 30px 0;
+  width: 644px;
+}
+
+#eventVenue, #eventCity{
+  margin: 0 0 30px 0;
+  font-size: 30px;
+}
+
+#eventDateTime {
+  display: flex;
+  border: 1px solid blue;
+  width: 644px;
+}
+
+#eventDate {
+  justify-content: center;
+  align-items: center;
+  border: 1px solid green;
+  width: 50%;
+  justify-content: center;
+}
+
+#eventTime {
+  justify-content: center;
+  align-items: center;
+  border: 1px solid green;
+  width: 50%;
+  justify-content: center;
+}
 

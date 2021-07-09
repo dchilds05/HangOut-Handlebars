@@ -13,14 +13,19 @@ const imageUploader = require('./../config/cloudinary')
 const URI = require("urijs");
 const URITemplate = require('urijs/src/URITemplate');
 
-let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?id,apikey}`);
+let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?q*,apikey}`);
 
 
 
 //CREATE EVENT PAGES 
+
+
 router.get("/create", (req, res) => {
     res.render("eventPages/createEvent")
 })
+
+
+
 
 router.post("/create", imageUploader.single('img'), (req, res) => {
 
@@ -41,39 +46,35 @@ router.post("/create", imageUploader.single('img'), (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.post("/:id/fav", (req, res) => {
-    
-    const eventId = req.params.id
-    const userId = req.session.user._id
 
-    console.log("user: ", userId, "event: ", eventId)
 
-    Event.findById(eventId)
-    .then(eventFound => {
-        User.findByIdAndUpdate(userId, {
-            $push: {savedEvents: eventFound}
-        }).then(user => console.log("user was updated"))
-        console.log("this event is ours")
+//EVENT CATEGORIES 
+
+router.get("/category/:categoryName" , (req, res) => {
+    let userCity = req.session.user.city
+    let category = req.params.categoryName
+
+    let eventUri = uriTemplate.expand({
+        id: {
+            size: "30", 
+            classificationName: "music",
+            city: userCity,
+        },
+        apikey: apiKey
     })
-    .catch(eventNotFound => {
-        let eventUri = uriTemplate.expand({
-            id: eventId,
-            apikey: apiKey
-        })
 
-        axios.get(eventUri).then(result => {
-            let eventFromApi = convert(result.data._embedded.events[0]);
-            return eventFromApi
-        }).then(eventFromApi => {
-            User.findByIdAndUpdate(userId, {
-                $push: {savedEvents: eventFromApi}
-            }).then(user => console.log("user was updated"))
-            console.log("this event: ", eventFromApi, " is not ours")
-        })
-    })
+    axios.get(eventUri).then(results => {
+        let eventFromApi = results.map(result.data._embedded.events);
+        return eventFromApi
+    }).then(eventFound => {
+        res.render("eventPages/event", eventFound)
+        console.log("this event is not ours")
+    }).catch(err => console.log(err))
 
 
 })
+
+
 
 
 //SAVE AN EVENT POST ROUTE 
@@ -93,7 +94,9 @@ router.post("/:id/fav", (req, res) => {
     })
     .catch(eventNotFound => {
         let eventUri = uriTemplate.expand({
-            id: eventId,
+            q: {
+                id: eventId
+            },
             apikey: apiKey
         })
 
@@ -110,6 +113,40 @@ router.post("/:id/fav", (req, res) => {
 
 
 })
+
+
+
+
+
+//EVENT DETAILS GET ROUTE 
+router.get("/:id", (req, res) => {
+    const eventId = req.params.id
+
+    Event.findById(eventId)
+    .then(eventFound => {
+        res.render("eventPages/event", eventFound)
+        console.log("this event is ours")
+    })
+    .catch(eventNotFound => {
+        let eventUri = uriTemplate.expand({
+            q: {
+                id: eventId
+            },
+            apikey: apiKey
+        })
+
+        axios.get(eventUri).then(result => {
+            let eventFromApi = convert(result.data._embedded.events[0]);
+            return eventFromApi
+        }).then(eventFound => {
+            res.render("eventPages/event", eventFound)
+            console.log("this event is not ours")
+        }).catch(err => console.log(err))
+    })
+
+})
+
+
 
 
 
