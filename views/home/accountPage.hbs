@@ -19,17 +19,19 @@
             <h1>CREATED EVENTS</h1><br>
             <div id = "accountCreatedEvents">
                 {{#each createdEvents}}
-                    <section class = "createdEventsIndividualSection"> 
-                        <div>
-                            <p class = "title">{{name}}</p>
-                        </div>
-                        <div>
-                            <img class = "eachImage" src={{img}} alt="Placeholder image">
-                        </div>
-                         <div class = "lastDiv">
-                            <h5 class="dateTime"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
-                        </div>
-                    </section>  
+                    <a href="/event/{{_id}}">
+                        <section class = "createdEventsIndividualSection"> 
+                            <div>
+                                <p class = "title">{{name}}</p>
+                            </div>
+                            <div>
+                                <img class = "eachImage" src={{img}} alt="Placeholder image">
+                            </div>
+                            <div class = "lastDiv">
+                                <h5 class="dateTime"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
+                            </div>
+                        </section>
+                    </a>
                 {{/each}}
             </div>
         </div>
@@ -40,17 +42,19 @@
             <h1>SAVED EVENTS</h1><br>
             <div id = "accountCreatedEvents">
                 {{#each savedEvents}}
-                    <section class = "createdEventsIndividualSection"> 
-                        <div>
-                            <p class = "title">{{name}}</p>
-                        </div>
-                        <div>
-                            <img class = "eachImage" src={{img}} alt="Placeholder image">
-                        </div>
-                         <div class = "lastDiv">
-                            <h5 class="dateTime"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
-                        </div>
-                    </section>  
+                    <a href="/event/{{_id}}">
+                        <section class = "createdEventsIndividualSection"> 
+                            <div>
+                                <p class = "title">{{name}}</p>
+                            </div>
+                            <div>
+                                <img class = "eachImage" src={{img}} alt="Placeholder image">
+                            </div>
+                            <div class = "lastDiv">
+                                <h5 class="dateTime"><time datetime="2016-1-1">{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time></h5>
+                            </div>
+                        </section>  
+                    </a>
                 {{/each}}
             </div>
         </div>

@@ -5,45 +5,87 @@ const axios = require('axios');
 
 const User = require("../models/User.model");
 const Event = require("../models/Event.model")
+const convert = require("../helperFunctions/convertTmData");
+
+const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
 const imageUploader = require('./../config/cloudinary')
 
 const URI = require("urijs");
 const URITemplate = require('urijs/src/URITemplate');
 
-const convert = require("../helperFunctions/convertTmData");
-
-let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?id,apikey}`);
-
-
-
-const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
-
+let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/events.json{?q*,apikey}`);
 
 
 
 //CREATE EVENT PAGES 
+
+
 router.get("/create", (req, res) => {
     res.render("eventPages/createEvent")
 })
+
+
+
 
 router.post("/create", imageUploader.single('img'), (req, res) => {
 
     const {name, type, tags, artistSiteUrl, img, description, venueName, city, country, date, time} = req.body;
 
     let location = {venueName, city, country}
-    let dateAndTime= {date, time}
+    let dateAndTime = {date, time};
 
     Event.create({name, type, tags, location, dateAndTime, artistSiteUrl, img: req.file.path, description, owner: req.session.user._id})
     .then(event => {
-        User.findByIdAndUpdate(req.session.user._id, {
-            $push: { createdEvents: event._id }
-        })
-        .then(() => res.redirect("/home"))
+        Event.findByIdAndUpdate(event._id, { owner: req.session.user})
+        .then(event => {
+            console.log("the event was created", event)
+            res.render("eventPages/event")
+        }).catch(err => console.log("error with event owner creation"))
     })
     
     .catch(err => console.log(err))
 })
 
+
+
+
+//EVENT CATEGORIES 
+
+router.get("/category/:categoryName" , (req, res) => {
+    let userCity = req.session.user.city
+    let category = req.params.categoryName
+
+    let eventUri = uriTemplate.expand({
+        q: {
+            size: "50", 
+            classificationName: category,
+            city: userCity,
+        },
+        apikey: apiKey
+    })
+
+    console.log("url : " , eventUri)
+
+    axios.get(eventUri).then(resultsApi => {
+
+        if (resultsApi.data.page.totalElements === 0 ) { 
+            res.render("search/noSearchResults" , {user: req.session.user})
+        }
+        else {
+            let eventsFromApi = resultsApi.data._embedded.events.map(convert);
+
+            if(eventsFromApi.length > 1) {
+                eventsFromApi.sort((a, b) => {return new Date(a.dateAndTime.date) - new Date(b.dateAndTime.date)})
+            }
+
+            res.render("eventPages/eventsByCategories", {results: eventsFromApi, categoryName: category, user: req.session.user})
+            console.log(eventsFromApi.length, "events from : " , category)
+        }
+
+    }).catch(err => console.log(err))
+
+
+})
 
 
 
@@ -64,7 +106,9 @@ router.post("/:id/fav", (req, res) => {
     })
     .catch(eventNotFound => {
         let eventUri = uriTemplate.expand({
-            id: eventId,
+            q: {
+                id: eventId
+            },
             apikey: apiKey
         })
 
@@ -81,6 +125,40 @@ router.post("/:id/fav", (req, res) => {
 
 
 })
+
+
+
+
+
+//EVENT DETAILS GET ROUTE 
+router.get("/:id", (req, res) => {
+    const eventId = req.params.id
+
+    Event.findById(eventId)
+    .then(eventFound => {
+        res.render("eventPages/event", eventFound)
+        console.log("this event is ours")
+    })
+    .catch(eventNotFound => {
+        let eventUri = uriTemplate.expand({
+            q: {
+                id: eventId
+            },
+            apikey: apiKey
+        })
+
+        axios.get(eventUri).then(result => {
+            let eventFromApi = convert(result.data._embedded.events[0]);
+            return eventFromApi
+        }).then(eventFound => {
+            res.render("eventPages/event", {eventFound: eventFound, user: req.session.user})
+            console.log("this event is not ours")
+        }).catch(err => console.log(err))
+    })
+
+})
+
+
 
 
 
