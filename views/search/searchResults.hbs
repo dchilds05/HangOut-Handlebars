@@ -1,6 +1,8 @@
 <div class = "morgane page-main-div">
 
-<H1>Search results: </H1>
+<div class = "searchHeader">
+<H1>Search results</H1>
+</div>
 
 <br>
 <br>
@@ -9,18 +11,19 @@
 
 {{#each results}}
 
+
 <div class="card">
+    <a href="/event/{{this._id}}">
     <div class="result-card-header">
-          <h3>{{this.name}}</h3>
+          <h4 class="title is-4">{{this.name}}</h4>
     </div> 
     <div class="card-image">
           <img src={{this.img}} alt="Placeholder image">
     </div>
     <div class="result-card-content">
-            <h3 class="card-title"> {{this.location.city}} -- 
+            <h5 class="title is-5 card-title"> {{this.location.city}} -- 
                 <time>{{this.dateAndTime.date}} {{#if this.dateAndTime.time}} - {{this.dateAndTime.time}} {{/if}}</time>
-            </h3>
-            <a href="/event/{{this._id}}">See more</a>
+            </h5>
     </div>
     <div class="result-card-footer">
         <div>
@@ -40,8 +43,9 @@
         {{/if}}
         </div>
     </div>
-
+    </a>
 </div>
+
 
 
 {{/each}}

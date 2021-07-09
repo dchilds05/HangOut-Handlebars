@@ -48,6 +48,7 @@ router.post("/create", imageUploader.single('img'), (req, res) => {
 
 
 
+
 //EVENT CATEGORIES 
 
 router.get("/category/:categoryName" , (req, res) => {
@@ -55,25 +56,36 @@ router.get("/category/:categoryName" , (req, res) => {
     let category = req.params.categoryName
 
     let eventUri = uriTemplate.expand({
-        id: {
-            size: "30", 
-            classificationName: "music",
+        q: {
+            size: "50", 
+            classificationName: category,
             city: userCity,
         },
         apikey: apiKey
     })
 
-    axios.get(eventUri).then(results => {
-        let eventFromApi = results.map(result.data._embedded.events);
-        return eventFromApi
-    }).then(eventFound => {
-        res.render("eventPages/event", eventFound)
-        console.log("this event is not ours")
+    console.log("url : " , eventUri)
+
+    axios.get(eventUri).then(resultsApi => {
+
+        if (resultsApi.data.page.totalElements === 0 ) { 
+            res.render("search/noSearchResults" , {user: req.session.user})
+        }
+        else {
+            let eventsFromApi = resultsApi.data._embedded.events.map(convert);
+
+            if(eventsFromApi.length > 1) {
+                eventsFromApi.sort((a, b) => {return new Date(a.dateAndTime.date) - new Date(b.dateAndTime.date)})
+            }
+
+            res.render("eventPages/eventsByCategories", {results: eventsFromApi, categoryName: category, user: req.session.user})
+            console.log(eventsFromApi.length, "events from : " , category)
+        }
+
     }).catch(err => console.log(err))
 
 
 })
-
 
 
 
@@ -139,7 +151,7 @@ router.get("/:id", (req, res) => {
             let eventFromApi = convert(result.data._embedded.events[0]);
             return eventFromApi
         }).then(eventFound => {
-            res.render("eventPages/event", eventFound)
+            res.render("eventPages/event", {eventFound: eventFound, user: req.session.user})
             console.log("this event is not ours")
         }).catch(err => console.log(err))
     })

@@ -497,7 +497,7 @@ nav {
 }
 
 .search-label {
-  font-weight: 700;
+  font-weight: bolder;
 }
 
 .search-input {
@@ -529,7 +529,7 @@ nav {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: white;
-  background-color: rgb(135, 206, 235);
+  background-color: #247956;
   transition: background-color 0.8s ease;
 }
 
@@ -549,6 +549,10 @@ nav {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+.card-link{
+  color: black;
+}
+
 .card {
   padding: 1rem;
   display: flex;
@@ -565,6 +569,7 @@ nav {
 
 
 .card img {
+  padding-top: 5px;
   width: 100%
 }
 
@@ -588,6 +593,7 @@ nav {
   color: black;
   font-size: medium;
 }
+
 
 .result-card-footer div {
   width: 100%;
@@ -630,6 +636,17 @@ nav {
   width: 644px;
 }
 
+#eventButton {
+  margin:0 0 30px 0;
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+}
+
+#eventButton a{
+  color: black;
+}
+
 #eventVenue, #eventCity{
   margin: 0 0 30px 0;
   font-size: 30px;
@@ -637,23 +654,98 @@ nav {
 
 #eventDateTime {
   display: flex;
-  border: 1px solid blue;
   width: 644px;
+  margin: 0 0 30px 0;
+  justify-content: space-evenly;
 }
 
-#eventDate {
-  justify-content: center;
-  align-items: center;
-  border: 1px solid green;
-  width: 50%;
-  justify-content: center;
+#eventLinks {
+  display: flex;
+  width: 644px;
+  margin: 0 0 30px 0;
+  justify-content: space-evenly;
 }
 
-#eventTime {
+.searchHeader {
+  width: 100%;
+  display: flex;
   justify-content: center;
-  align-items: center;
-  border: 1px solid green;
-  width: 50%;
-  justify-content: center;
+  font-size: 30px;
+  font-weight: 600;
 }
 
+#noSearchHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600p;
+  margin-top: 70px;
+}
+
+#noSearchHeader img {
+  margin-top: 75px;
+  width: 500px;
+  align-self: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: rgba(58, 194, 138, 0.3); /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: grey;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

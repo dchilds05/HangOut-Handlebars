@@ -1,10 +1,10 @@
 <div id = "eventMamaDiv">
-
+    {{#with eventFound}}
     <h1 id = "eventTitle">{{name}}</h1>
 
     <img  id = "eventImage" src="{{img}}" alt="event image">
 
-    <button>
+    <button id = "eventButton">
         <a class= "result-card-button" nohref id="save-event" onclick="saveAnEvent('{{_id}}')()" class="card-footer-item">Save Event</a>
     </button>
 
@@ -20,13 +20,18 @@
         <div id = "eventTime"><h3>Time: {{dateAndTime.time}}</h3></div>
     </section>
 
-    <a href="{{urlForTickets}}"><h4 id = "eventTicketUrl">Get tickets here!</h4></a>
+    <section id = "eventLinks">
 
-    <a href="{{artistSiteUrl}}"><h4 id = "eventArtistUrl">Artist Info</h4></a>
+        <a href="{{urlForTickets}}"><button id = "eventTicketUrl">Get tickets here!</button></a>
+        <a href="{{artistSiteUrl}}"><button id = "eventArtistUrl">Artist Info</button></a>
+
+    </section>
 
     {{#if owner.name}}
     <h4 id = "eventOwner">Creator of this event: {{owner.name}}</h4>
         {{else}}
             <h4 id = "eventOwner">Creator of this event: Ticketmaster</h4>
     {{/if}}
+
+    {{/with}}
 </div>
