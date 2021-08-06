@@ -24,6 +24,7 @@ const apiKey = process.env.APIKEY || "dCkxNrTE0AgGoRUEfzKDYKoSkQOS2Evd";
 let uriTemplate = new URITemplate(`https://app.ticketmaster.com/discovery/v2/{resource}.json{?q*,apikey}`);
 
 
+
 //SEARCH API THEN DB THEN CONCAT RESULTS
 router.get("/", notLoggedIn, (req, res) => {
     let resultsArray = [];

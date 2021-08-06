@@ -87,8 +87,6 @@ router.get("/category/:categoryName" , (req, res) => {
 
 })
 
-
-
 //SAVE AN EVENT POST ROUTE 
 router.post("/:id/fav", (req, res) => {
     

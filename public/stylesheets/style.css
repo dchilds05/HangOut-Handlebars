@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 0px;
@@ -118,6 +120,7 @@ nav {
 }
 
 #indexLeft h1{
+  font-family: 'Abril Fatface', cursive;
   font-size: 30px;
 }
 
@@ -138,7 +141,9 @@ nav {
 #indexRight {
   width: 40%;
   height: 600px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #roundLogo {

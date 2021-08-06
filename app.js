@@ -17,14 +17,6 @@ const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowe
 app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
 
 
-//Deploy to Heroku
-
-
-
-//API CONFIG HERE FOR NOW
-
-
-
 //ROUTES
 const index = require("./routes/index.routes");
 app.use("/", index);
